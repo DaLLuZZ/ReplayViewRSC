@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <title>RSC Replay Viewer</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/base64-string.min.js"></script>
+        <script src="https://raw.githubusercontent.com/DaLLuZZ/Facepunch.WebGame/master/js/facepunch.webgame.js"></script>
+        <script src="https://raw.githubusercontent.com/DaLLuZZ/SourceUtils/master/SourceUtils.WebExport/Resources/js/sourceutils.js"></script>
+        <script src="https://raw.githubusercontent.com/DaLLuZZ/ReplayViewRSC/main/js/replayviewer.js"></script>
+        <link type="text/css" rel="stylesheet" href="/ReplayViewRSC/resources/styles/mapviewer.css" />
+        <link type="text/css" rel="stylesheet" href="/ReplayViewRSC/resources/styles/replayviewer.css" />
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                background-color: #000;
+                color: #fff;
+            }
+
+            #title {
+                padding-left: 24px;
+            }
+
+            #map-view {
+                position: absolute;
+                top: 72px;
+                left: 16px;
+                right: 312px;
+                bottom: 16px;
+                background-color: black;
+            }
+
+            #replay-list {
+                position: absolute;
+                width: 256px;
+                right: 16px;
+                top: 72px;
+                bottom: 16px;
+                background-color: #111;
+                padding-left: 24px;
+            }
+
+            #replay-list a {
+                color: #bcf;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body>
+    <h2 id="title">RSC Replay Viewer</h2>
+    <div id="map-view">
+        <script>
+            var viewer;
+            window.onload = function()
+            {
+                viewer = new ReplayViewRSC.ReplayViewer(document.getElementById("map-view"));
+                viewer.showDebugPanel = true;
+                viewer.mapBaseUrl = "https://raw.githubusercontent.com/DaLLuZZ/SurfMaps/main/maps";
+
+                viewer.replayLoaded.addListener(function(replay) {
+
+                    var title = replay.playerName + " - " + replay.time + " on " + replay.mapName;
+
+                    document.getElementById("title").innerText = title;
+                    document.title = title;
+                });
+
+                var searchParams = new URLSearchParams(window.location.search);
+                var replayUrl = searchParams.get("replay");
+
+                if (replayUrl != null)
+                {
+                    viewer.isPlaying = true;
+                    viewer.loadReplay(decodeURIComponent(replayUrl));
+                    viewer.animate();
+                }
+                else
+                    viewer.showMessage("No replay URL provided");
+            }
+        </script>
+    </div>
+    <div id="replay-list">
+        <h2>RSC Surf Replays</h2>
+        <h3>surf_utopia_njv</h2>
+        <ul>
+            <li><a href="?replay=https://raw.githubusercontent.com/DaLLuZZ/SurfReplays/main/replay/85tick/surf_utopia_njv.rec">Map</a></li>
+            <li><a href="?replay=https://raw.githubusercontent.com/DaLLuZZ/SurfReplays/main/replay/85tick/surf_utopia_njv_style_1.rec">Map SW</a></li>
+            <li><a href="?replay=https://raw.githubusercontent.com/DaLLuZZ/SurfReplays/main/replay/85tick/surf_utopia_njv_style_2.rec">Map HSW</a></li>
+            <li><a href="?replay=https://raw.githubusercontent.com/DaLLuZZ/SurfReplays/main/replay/85tick/surf_utopia_njv_style_3.rec">Map BW</a></li>
+            <li><a href="?replay=https://raw.githubusercontent.com/DaLLuZZ/SurfReplays/main/replay/85tick/surf_utopia_njv_style_4.rec">Map LG</a></li>
+            <li><a href="?replay=https://raw.githubusercontent.com/DaLLuZZ/SurfReplays/main/replay/85tick/surf_utopia_njv_style_5.rec">Map SM</a></li>
+            <li><a href="?replay=https://raw.githubusercontent.com/DaLLuZZ/SurfReplays/main/replay/85tick/surf_utopia_njv_style_6.rec">Map FFW</a></li>
+            <li><a href="?replay=https://raw.githubusercontent.com/DaLLuZZ/SurfReplays/main/replay/85tick/surf_utopia_njv_style_7.rec">Map FS</a></li>
+        </ul>
+    </div>
+    </body>
+</html>

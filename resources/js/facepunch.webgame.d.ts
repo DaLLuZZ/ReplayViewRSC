@@ -1,18 +1,4 @@
 declare namespace Facepunch {
-    class LZString {
-        static readonly compressToBase64: (input: any) => string;
-        static readonly decompressFromBase64: (input: any) => string;
-        static readonly compressToUTF16: (input: any) => string;
-        static readonly decompressFromUTF16: (compressed: any) => string;
-        static readonly compressToUint8Array: (uncompressed: any) => Uint8Array;
-        static readonly decompressFromUint8Array: (compressed: any) => string;
-        static readonly compressToEncodedURIComponent: (input: any) => string;
-        static readonly decompressFromEncodedURIComponent: (input: any) => string;
-        static readonly compress: (uncompressed: any) => string;
-        static readonly decompress: (compressed: any) => string;
-    }
-}
-declare namespace Facepunch {
     interface ILoadable {
         loadNext(callback: (requeue: boolean) => void): void;
         getLoadPriority(): number;
@@ -32,8 +18,22 @@ declare namespace Facepunch {
         protected enqueueItem(item: TLoadable): void;
         protected abstract onCreateItem(url: string): TLoadable;
         protected onFinishedLoadStep(item: TLoadable): void;
-        private getNextToLoad;
+        private getNextToLoad();
         update(requestQuota: number): number;
+    }
+}
+declare namespace Facepunch {
+    class LZString {
+        static readonly compressToBase64: (input: any) => string;
+        static readonly decompressFromBase64: (input: any) => string;
+        static readonly compressToUTF16: (input: any) => string;
+        static readonly decompressFromUTF16: (compressed: any) => string;
+        static readonly compressToUint8Array: (uncompressed: any) => Uint8Array;
+        static readonly decompressFromUint8Array: (compressed: any) => string;
+        static readonly compressToEncodedURIComponent: (input: any) => string;
+        static readonly decompressFromEncodedURIComponent: (input: any) => string;
+        static readonly compress: (uncompressed: any) => string;
+        static readonly decompress: (compressed: any) => string;
     }
 }
 declare namespace Facepunch {
@@ -128,7 +128,7 @@ declare namespace Facepunch {
         Yxz = 9,
         Yzx = 3,
         Zxy = 6,
-        Zyx = 10
+        Zyx = 10,
     }
     class Euler {
         x: number;
@@ -263,7 +263,7 @@ declare namespace Facepunch {
             Float3 = 2,
             Float4 = 3,
             Matrix4 = 4,
-            Texture = 5
+            Texture = 5,
         }
         class CommandBufferParameter {
             private static nextId;
@@ -289,63 +289,63 @@ declare namespace Facepunch {
             private tempCurFrame;
             immediate: boolean;
             constructor(context: WebGLRenderingContext, immediate?: boolean);
-            private getCommandName;
+            private getCommandName(action);
             logCommands(): void;
-            private clearState;
+            private clearState();
             clearCommands(): void;
             getDrawCalls(): number;
             setParameter(param: CommandBufferParameter, value: Float32Array | Texture): void;
             getArrayParameter(param: CommandBufferParameter): Float32Array;
             getTextureParameter(param: CommandBufferParameter): Texture;
             run(): void;
-            private push;
+            private push(action, args);
             clear(mask: number): void;
-            private onClear;
+            private onClear(gl, args);
             dynamicMaterial(callback: (buf: CommandBuffer) => void): void;
-            private setCap;
+            private setCap(cap, enabled);
             enable(cap: number): void;
-            private onEnable;
+            private onEnable(gl, args);
             disable(cap: number): void;
-            private onDisable;
+            private onDisable(gl, args);
             depthMask(flag: boolean): void;
-            private onDepthMask;
+            private onDepthMask(gl, args);
             blendFuncSeparate(srcRgb: number, dstRgb: number, srcAlpha: number, dstAlpha: number): void;
-            private onBlendFuncSeparate;
+            private onBlendFuncSeparate(gl, args);
             useProgram(program: ShaderProgram): void;
-            private onUseProgram;
+            private onUseProgram(gl, args);
             setUniformParameter(uniform: Uniform, parameter: CommandBufferParameter): void;
-            private setUniformParameterInternal;
-            private onSetUniformParameter;
+            private setUniformParameterInternal(uniform, param, unit?);
+            private onSetUniformParameter(gl, args);
             setUniform1F(uniform: Uniform, x: number): void;
-            private onSetUniform1F;
+            private onSetUniform1F(gl, args);
             setUniform1I(uniform: Uniform, x: number): void;
-            private onSetUniform1I;
+            private onSetUniform1I(gl, args);
             setUniform2F(uniform: Uniform, x: number, y: number): void;
-            private onSetUniform2F;
+            private onSetUniform2F(gl, args);
             setUniform3F(uniform: Uniform, x: number, y: number, z: number): void;
-            private onSetUniform3F;
+            private onSetUniform3F(gl, args);
             setUniform4F(uniform: Uniform, x: number, y: number, z: number, w: number): void;
-            private onSetUniform4F;
+            private onSetUniform4F(gl, args);
             setUniformTextureSize(uniform: Uniform4F, tex: Texture): void;
-            private onSetUniformTextureSize;
+            private onSetUniformTextureSize(gl, args);
             setUniformMatrix4(uniform: Uniform, transpose: boolean, values: Float32Array): void;
-            private onSetUniformMatrix4;
+            private onSetUniformMatrix4(gl, args);
             bindTexture(unit: number, value: Texture): void;
-            private onBindTexture;
-            private onBindAnimatedTexture;
+            private onBindTexture(gl, args);
+            private onBindAnimatedTexture(gl, args);
             bindBuffer(target: number, buffer: WebGLBuffer): void;
-            private onBindBuffer;
+            private onBindBuffer(gl, args);
             enableVertexAttribArray(index: number): void;
-            private onEnableVertexAttribArray;
+            private onEnableVertexAttribArray(gl, args);
             disableVertexAttribArray(index: number): void;
-            private onDisableVertexAttribArray;
+            private onDisableVertexAttribArray(gl, args);
             vertexAttribPointer(index: number, size: number, type: number, normalized: boolean, stride: number, offset: number): void;
-            private onVertexAttribPointer;
+            private onVertexAttribPointer(gl, args);
             drawElements(mode: number, count: number, type: number, offset: number, elemSize: number): void;
-            private onDrawElements;
+            private onDrawElements(gl, args);
             bindFramebuffer(buffer: FrameBuffer, fitView?: boolean): void;
             bindFramebufferInternal(buffer: FrameBuffer, fitView: boolean): void;
-            private onBindFramebuffer;
+            private onBindFramebuffer(gl, args);
         }
     }
 }
@@ -386,7 +386,7 @@ declare namespace Facepunch {
             invalidateGeometry(): void;
             protected onPopulateDrawList(drawList: DrawList): void;
             render(): void;
-            private setupFrameBuffers;
+            private setupFrameBuffers();
             bufferOpaqueTargetBegin(buf: CommandBuffer): void;
             bufferRenderTargetEnd(buf: CommandBuffer): void;
             private static readonly bufferShadowTargetBegin_lightNorm;
@@ -456,15 +456,13 @@ declare namespace Facepunch {
             progressScale: number;
             constructor(game: Game);
             clear(): void;
-            get phase(): number;
-            set phase(value: number);
-            get frequency(): number;
-            set frequency(value: number);
+            phase: number;
+            frequency: number;
             setColor(color: IVector3): void;
             setColor(color0: IVector3, color1: IVector3): void;
             private lastPos;
             private progress;
-            private addVertex;
+            private addVertex(pos, progress);
             moveTo(pos: IVector3): void;
             lineTo(pos: IVector3, progress?: number): void;
             update(): void;
@@ -490,9 +488,9 @@ declare namespace Facepunch {
             addItems<TItem extends IDrawListItem>(items: TItem[]): void;
             private isBuildingList;
             invalidate(): void;
-            private bufferHandle;
-            private static compareHandles;
-            private buildHandleList;
+            private bufferHandle(buf, handle);
+            private static compareHandles(a, b);
+            private buildHandleList(shaders);
             appendToBuffer(buf: CommandBuffer, camera: Camera): void;
         }
     }
@@ -549,7 +547,7 @@ declare namespace Facepunch {
             private depthTexture;
             constructor(tex: RenderTexture);
             constructor(gl: WebGLRenderingContext, width: number, height: number);
-            private unbindAndCheckState;
+            private unbindAndCheckState();
             addDepthAttachment(existing?: RenderTexture): void;
             getColorTexture(): RenderTexture;
             getDepthTexture(): RenderTexture;
@@ -566,7 +564,7 @@ declare namespace Facepunch {
         enum MouseButton {
             Left = 1,
             Middle = 2,
-            Right = 3
+            Right = 3,
         }
         enum Key {
             Backspace = 8,
@@ -667,7 +665,7 @@ declare namespace Facepunch {
             OpenBracket = 219,
             BackSlash = 220,
             CloseBraket = 221,
-            SingleQuote = 222
+            SingleQuote = 222,
         }
     }
 }
@@ -702,7 +700,7 @@ declare namespace Facepunch {
             getHeight(): number;
             getMouseScreenPos(out?: Vector2): Vector2;
             getMouseViewPos(out?: Vector2): Vector2;
-            private getScreenPos;
+            private getScreenPos(pageX, pageY, out?);
             isPointerLocked(): boolean;
             populateDrawList(drawList: DrawList, camera: Camera): void;
             addDrawListInvalidationHandler(action: (geom: boolean) => void): void;
@@ -759,7 +757,7 @@ declare namespace Facepunch {
             Color = 3,
             TextureUrl = 4,
             TextureIndex = 5,
-            TextureInfo = 6
+            TextureInfo = 6,
         }
         interface IMaterialProperty {
             type: MaterialPropertyType;
@@ -793,7 +791,7 @@ declare namespace Facepunch {
             private loadProgress;
             constructor(game: Game, url?: string);
             getLoadProgress(): number;
-            private addPropertyFromInfo;
+            private addPropertyFromInfo(info);
             loadFromInfo(info: IMaterialInfo, textureSource?: (index: number) => Texture): void;
             loadNext(callback: (requeue: boolean) => void): void;
         }
@@ -853,8 +851,8 @@ declare namespace Facepunch {
             clear(): void;
             compareTo(other: MeshGroup): number;
             canAddMeshData(data: IMeshData): boolean;
-            private ensureCapacity;
-            private updateBuffer;
+            private ensureCapacity<TArray>(array, length, ctor);
+            private updateBuffer<TArray>(target, buffer, data, newData, oldData, offset);
             addVertexData(data: Float32Array, meshHandle?: MeshHandle): number;
             addIndexData(data: Uint32Array | Uint16Array, meshHandle?: MeshHandle): number;
             addMeshData(data: IMeshData, getMaterial: (materialIndex: number) => Material, target: MeshHandle[]): void;
@@ -873,7 +871,7 @@ declare namespace Facepunch {
             LineLoop,
             Triangles,
             TriangleStrip,
-            TriangleFan
+            TriangleFan,
         }
         class MeshHandle {
             static readonly undefinedHandle: MeshHandle;
@@ -960,8 +958,8 @@ declare namespace Facepunch {
             readonly context: WebGLRenderingContext;
             constructor(context: WebGLRenderingContext);
             resetUniformCache(): void;
-            private getFromName;
-            private getFromCtor;
+            private getFromName(name);
+            private getFromCtor(ctor);
             get(name: string): ShaderProgram;
             get(ctor: IProgramCtor): ShaderProgram;
             createMaterial(ctor: IProgramCtor, isDynamic: boolean): Material;
@@ -1003,10 +1001,10 @@ declare namespace Facepunch {
             isCompiled(): boolean;
             addAttribute(name: string, attrib: VertexAttribute): void;
             addUniform<TUniform extends Uniform>(name: string, ctor: IUniformCtor<TUniform>): TUniform;
-            private static formatSource;
+            private static formatSource(source);
             protected includeShaderSource(type: number, source: string): void;
-            private compileShader;
-            private findAttribLocation;
+            private compileShader(type, source);
+            private findAttribLocation(name, attrib);
             protected compile(): void;
             bufferEnableAttributes(buf: CommandBuffer, attribs?: VertexAttribute[]): void;
             bufferDisableAttributes(buf: CommandBuffer): void;
@@ -1025,340 +1023,6 @@ declare namespace Facepunch {
             createMaterialProperties(): any;
             bufferMaterial(buf: CommandBuffer, material: Material): void;
             bufferMaterialProps(buf: CommandBuffer, props: TMaterialProps): void;
-        }
-    }
-}
-declare namespace Facepunch {
-    namespace WebGame {
-        class ShadowCamera extends WebGame.OrthographicCamera {
-            readonly game: Game;
-            private readonly targetCamera;
-            constructor(game: Game, targetCamera: Camera);
-            private addToFrustumBounds;
-            private static readonly getFrustumBounds_vec;
-            private getFrustumBounds;
-            private static readonly renderShadows_bounds;
-            private static readonly renderShadows_vec1;
-            private static readonly renderShadows_vec2;
-            bufferCascadeBegin(lightRotation: Facepunch.Quaternion, near: number, far: number): void;
-            bufferCascadeEnd(): void;
-        }
-    }
-}
-declare namespace Facepunch {
-    namespace WebGame {
-        class StaticProp extends DrawableEntity {
-            private model;
-            private tint;
-            constructor();
-            setColorTint(color: IVector3): void;
-            setModel(model: Model): void;
-            private onModelLoaded;
-            getModel(): Model;
-        }
-    }
-}
-declare namespace Facepunch {
-    namespace WebGame {
-        abstract class Texture extends RenderResource<Texture> {
-            private static nextId;
-            readonly id: number;
-            constructor();
-            isLoaded(): boolean;
-            abstract hasMipLevel(level: number): boolean;
-            abstract getWidth(level: number): number;
-            abstract getHeight(level: number): number;
-            getFrameCount(): number;
-            abstract getTarget(): TextureTarget;
-            abstract getHandle(frame?: number): WebGLTexture;
-            dispose(): void;
-        }
-        enum TextureFormat {
-            Alpha,
-            Rgb,
-            Rgba,
-            DepthComponent,
-            Luminance
-        }
-        enum TextureDataType {
-            Uint8,
-            Uint16,
-            Uint32,
-            Float
-        }
-        enum TextureTarget {
-            Texture2D,
-            TextureCubeMap
-        }
-        enum TextureWrapMode {
-            ClampToEdge,
-            Repeat,
-            MirroredRepeat
-        }
-        enum TextureMinFilter {
-            Nearest,
-            Linear,
-            NearestMipmapNearest,
-            LinearMipmapNearest,
-            NearestMipmapLinear,
-            LinearMipmapLinear
-        }
-        enum TextureMagFilter {
-            Nearest,
-            Linear
-        }
-        enum TextureParameterType {
-            Integer,
-            Float
-        }
-        enum TextureParameter {
-            WrapS,
-            WrapT,
-            MinFilter,
-            MagFilter
-        }
-        class RenderTexture extends Texture {
-            readonly context: WebGLRenderingContext;
-            readonly target: TextureTarget;
-            readonly format: TextureFormat;
-            readonly type: TextureDataType;
-            private width;
-            private height;
-            private handle;
-            constructor(context: WebGLRenderingContext, target: TextureTarget, format: TextureFormat, type: TextureDataType, width: number, height: number);
-            hasMipLevel(level: number): boolean;
-            getWidth(level: number): number;
-            getHeight(level: number): number;
-            setWrapMode(mode: TextureWrapMode): void;
-            setWrapMode(wrapS: TextureWrapMode, wrapT: TextureWrapMode): void;
-            setFilter(minFilter: TextureMinFilter, magFilter: TextureMagFilter): void;
-            getTarget(): TextureTarget;
-            getHandle(frame?: number): WebGLTexture;
-            resize(width: number, height: number): void;
-            protected onResize(width: number, height: number): void;
-            dispose(): void;
-        }
-        interface IPixelData {
-            readonly channels: number;
-            readonly width: number;
-            readonly height: number;
-            readonly values: ArrayBufferView;
-        }
-        class PixelData<TArray extends ArrayBufferView> implements IPixelData {
-            readonly channels: number;
-            readonly width: number;
-            readonly height: number;
-            readonly values: TArray;
-            constructor(format: TextureFormat, width: number, height: number, ctor: {
-                new (size: number): TArray;
-            });
-        }
-        class ProceduralTexture2D extends RenderTexture {
-            private pixels;
-            name: string;
-            private static readonly channelBuffer;
-            constructor(context: WebGLRenderingContext, width: number, height: number, format?: TextureFormat, type?: TextureDataType);
-            setImage(image: HTMLImageElement): void;
-            copyFrom(tex: Texture): void;
-            toString(): string;
-            setPixelRgb(x: number, y: number, rgb: number): void;
-            setPixelRgba(x: number, y: number, rgba: number): void;
-            setPixelColor(x: number, y: number, color: IColor): void;
-            setPixel(x: number, y: number, channels: number[]): void;
-            getPixelColor(x: number, y: number, target?: IColor): IColor;
-            getPixel(x: number, y: number, target?: number[], dstIndex?: number): number[];
-            setPixels(x: number, y: number, width: number, height: number, values: number[]): void;
-            writePixels(): void;
-            readPixels(): void;
-            readPixels(frameBuffer: FrameBuffer): void;
-            protected onResize(width: number, height: number): void;
-        }
-        class TextureUtils {
-            private static whiteTexture;
-            static getWhiteTexture(context: WebGLRenderingContext): Texture;
-            private static blackTexture;
-            static getBlackTexture(context: WebGLRenderingContext): Texture;
-            private static translucentTexture;
-            static getTranslucentTexture(context: WebGLRenderingContext): Texture;
-            private static errorTexture;
-            static getErrorTexture(context: WebGLRenderingContext): Texture;
-        }
-        enum TextureFilter {
-            Nearest,
-            Linear
-        }
-        interface ITextureParameters {
-            wrapS?: TextureWrapMode | "CLAMP_TO_EDGE" | "REPEAT" | "MIRRORED_REPEAT";
-            wrapT?: TextureWrapMode | "CLAMP_TO_EDGE" | "REPEAT" | "MIRRORED_REPEAT";
-            filter?: TextureFilter | "NEAREST" | "LINEAR";
-            mipmap?: boolean;
-        }
-        interface IColor {
-            r: number;
-            g: number;
-            b: number;
-            a?: number;
-        }
-        interface ITextureElement {
-            level: number;
-            frame?: number;
-            target?: TextureTarget | string;
-            url?: string;
-            color?: IColor;
-        }
-        interface ITextureInfo {
-            path?: string;
-            target: TextureTarget | string;
-            width?: number;
-            height?: number;
-            frames?: number;
-            params: ITextureParameters;
-            elements: ITextureElement[];
-        }
-        class TextureLoadable extends Texture implements ILoadable {
-            private readonly context;
-            readonly url: string;
-            private info;
-            private frameCount;
-            private nextElement;
-            private readyFrameCount;
-            private readyFrames;
-            private frameHandles;
-            private target;
-            private filter;
-            private mipmap;
-            private level0Width;
-            private level0Height;
-            private loadProgress;
-            constructor(context: WebGLRenderingContext, url: string);
-            getLoadProgress(): number;
-            hasMipLevel(level: number): boolean;
-            isLoaded(): boolean;
-            getWidth(level: number): number;
-            getHeight(level: number): number;
-            getFrameCount(): number;
-            toString(): string;
-            getTarget(): TextureTarget;
-            getHandle(frame?: number): WebGLTexture;
-            getLoadPriority(): number;
-            private canLoadImmediately;
-            private applyTexParameters;
-            private getOrCreateHandle;
-            private static pixelBuffer;
-            private loadColorElement;
-            private loadImageElement;
-            private loadElement;
-            loadFromInfo(info: ITextureInfo): void;
-            loadNext(callback: (requeue: boolean) => void): void;
-        }
-    }
-}
-declare namespace Facepunch {
-    namespace WebGame {
-        class TextureLoader extends Loader<TextureLoadable> {
-            private readonly context;
-            constructor(context: WebGLRenderingContext);
-            protected onCreateItem(url: string): TextureLoadable;
-        }
-    }
-}
-declare namespace Facepunch {
-    namespace WebGame {
-        interface IUniformCtor<TUniform extends Uniform> {
-            new (program: ShaderProgram, name: string): TUniform;
-        }
-        abstract class Uniform {
-            protected readonly context: WebGLRenderingContext;
-            protected readonly program: ShaderProgram;
-            private name;
-            private location;
-            private parameter;
-            isSampler: boolean;
-            constructor(program: ShaderProgram, name: string);
-            toString(): string;
-            getLocation(): WebGLUniformLocation;
-            reset(): void;
-            bufferParameter(buf: CommandBuffer, param: CommandBufferParameter): void;
-        }
-        class Uniform1F extends Uniform {
-            private x;
-            reset(): void;
-            bufferValue(buf: CommandBuffer, x: number): void;
-            set(x: number): void;
-        }
-        class Uniform1I extends Uniform {
-            private x;
-            reset(): void;
-            bufferValue(buf: CommandBuffer, x: number): void;
-            set(x: number): void;
-        }
-        class Uniform2F extends Uniform {
-            private x;
-            private y;
-            reset(): void;
-            bufferValue(buf: CommandBuffer, x: number, y: number): void;
-            set(x: number, y: number): void;
-        }
-        class Uniform3F extends Uniform {
-            private x;
-            private y;
-            private z;
-            reset(): void;
-            bufferValue(buf: CommandBuffer, x: number, y: number, z: number): void;
-            set(x: number, y: number, z: number): void;
-        }
-        class Uniform4F extends Uniform {
-            private x;
-            private y;
-            private z;
-            private w;
-            reset(): void;
-            bufferValue(buf: CommandBuffer, x: number, y: number, z: number, w: number): void;
-            set(x: number, y: number, z: number, w: number): void;
-        }
-        class UniformSampler extends Uniform {
-            private value;
-            private default;
-            private texUnit;
-            private sizeUniform;
-            constructor(program: ShaderProgram, name: string);
-            getSizeUniform(): Uniform4F;
-            hasSizeUniform(): boolean;
-            getTexUnit(): number;
-            setDefault(tex: Texture): void;
-            reset(): void;
-            bufferValue(buf: CommandBuffer, tex: Texture): void;
-            set(tex: Texture): void;
-        }
-        class UniformMatrix4 extends Uniform {
-            private transpose;
-            private values;
-            reset(): void;
-            bufferValue(buf: CommandBuffer, transpose: boolean, values: Float32Array): void;
-            set(transpose: boolean, values: Float32Array): void;
-        }
-    }
-}
-declare namespace Facepunch {
-    namespace WebGame {
-        enum AttributeType {
-            Float
-        }
-        class VertexAttribute {
-            private static nextId;
-            static readonly position: VertexAttribute;
-            static readonly normal: VertexAttribute;
-            static readonly uv: VertexAttribute;
-            static readonly uv2: VertexAttribute;
-            static readonly rgb: VertexAttribute;
-            static readonly rgba: VertexAttribute;
-            static readonly alpha: VertexAttribute;
-            static compare(a: VertexAttribute, b: VertexAttribute): number;
-            readonly id: number;
-            readonly size: number;
-            readonly type: AttributeType;
-            readonly normalized: boolean;
-            constructor(size: number, type: AttributeType | string, normalized?: boolean);
         }
     }
 }
@@ -1458,6 +1122,340 @@ declare namespace Facepunch {
                 constructor(context: WebGLRenderingContext);
                 bufferMaterialProps(buf: CommandBuffer, props: VertexLitGenericMaterialProps): void;
             }
+        }
+    }
+}
+declare namespace Facepunch {
+    namespace WebGame {
+        class ShadowCamera extends WebGame.OrthographicCamera {
+            readonly game: Game;
+            private readonly targetCamera;
+            constructor(game: Game, targetCamera: Camera);
+            private addToFrustumBounds(vec, bounds);
+            private static readonly getFrustumBounds_vec;
+            private getFrustumBounds(near, far, bounds);
+            private static readonly renderShadows_bounds;
+            private static readonly renderShadows_vec1;
+            private static readonly renderShadows_vec2;
+            bufferCascadeBegin(lightRotation: Facepunch.Quaternion, near: number, far: number): void;
+            bufferCascadeEnd(): void;
+        }
+    }
+}
+declare namespace Facepunch {
+    namespace WebGame {
+        class StaticProp extends DrawableEntity {
+            private model;
+            private tint;
+            constructor();
+            setColorTint(color: IVector3): void;
+            setModel(model: Model): void;
+            private onModelLoaded(model);
+            getModel(): Model;
+        }
+    }
+}
+declare namespace Facepunch {
+    namespace WebGame {
+        abstract class Texture extends RenderResource<Texture> {
+            private static nextId;
+            readonly id: number;
+            constructor();
+            isLoaded(): boolean;
+            abstract hasMipLevel(level: number): boolean;
+            abstract getWidth(level: number): number;
+            abstract getHeight(level: number): number;
+            getFrameCount(): number;
+            abstract getTarget(): TextureTarget;
+            abstract getHandle(frame?: number): WebGLTexture;
+            dispose(): void;
+        }
+        enum TextureFormat {
+            Alpha,
+            Rgb,
+            Rgba,
+            DepthComponent,
+            Luminance,
+        }
+        enum TextureDataType {
+            Uint8,
+            Uint16,
+            Uint32,
+            Float,
+        }
+        enum TextureTarget {
+            Texture2D,
+            TextureCubeMap,
+        }
+        enum TextureWrapMode {
+            ClampToEdge,
+            Repeat,
+            MirroredRepeat,
+        }
+        enum TextureMinFilter {
+            Nearest,
+            Linear,
+            NearestMipmapNearest,
+            LinearMipmapNearest,
+            NearestMipmapLinear,
+            LinearMipmapLinear,
+        }
+        enum TextureMagFilter {
+            Nearest,
+            Linear,
+        }
+        enum TextureParameterType {
+            Integer,
+            Float,
+        }
+        enum TextureParameter {
+            WrapS,
+            WrapT,
+            MinFilter,
+            MagFilter,
+        }
+        class RenderTexture extends Texture {
+            readonly context: WebGLRenderingContext;
+            readonly target: TextureTarget;
+            readonly format: TextureFormat;
+            readonly type: TextureDataType;
+            private width;
+            private height;
+            private handle;
+            constructor(context: WebGLRenderingContext, target: TextureTarget, format: TextureFormat, type: TextureDataType, width: number, height: number);
+            hasMipLevel(level: number): boolean;
+            getWidth(level: number): number;
+            getHeight(level: number): number;
+            setWrapMode(mode: TextureWrapMode): void;
+            setWrapMode(wrapS: TextureWrapMode, wrapT: TextureWrapMode): void;
+            setFilter(minFilter: TextureMinFilter, magFilter: TextureMagFilter): void;
+            getTarget(): TextureTarget;
+            getHandle(frame?: number): WebGLTexture;
+            resize(width: number, height: number): void;
+            protected onResize(width: number, height: number): void;
+            dispose(): void;
+        }
+        interface IPixelData {
+            readonly channels: number;
+            readonly width: number;
+            readonly height: number;
+            readonly values: ArrayBufferView;
+        }
+        class PixelData<TArray extends ArrayBufferView> implements IPixelData {
+            readonly channels: number;
+            readonly width: number;
+            readonly height: number;
+            readonly values: TArray;
+            constructor(format: TextureFormat, width: number, height: number, ctor: {
+                new (size: number): TArray;
+            });
+        }
+        class ProceduralTexture2D extends RenderTexture {
+            private pixels;
+            name: string;
+            private static readonly channelBuffer;
+            constructor(context: WebGLRenderingContext, width: number, height: number, format?: TextureFormat, type?: TextureDataType);
+            setImage(image: HTMLImageElement): void;
+            copyFrom(tex: Texture): void;
+            toString(): string;
+            setPixelRgb(x: number, y: number, rgb: number): void;
+            setPixelRgba(x: number, y: number, rgba: number): void;
+            setPixelColor(x: number, y: number, color: IColor): void;
+            setPixel(x: number, y: number, channels: number[]): void;
+            getPixelColor(x: number, y: number, target?: IColor): IColor;
+            getPixel(x: number, y: number, target?: number[], dstIndex?: number): number[];
+            setPixels(x: number, y: number, width: number, height: number, values: number[]): void;
+            writePixels(): void;
+            readPixels(): void;
+            readPixels(frameBuffer: FrameBuffer): void;
+            protected onResize(width: number, height: number): void;
+        }
+        class TextureUtils {
+            private static whiteTexture;
+            static getWhiteTexture(context: WebGLRenderingContext): Texture;
+            private static blackTexture;
+            static getBlackTexture(context: WebGLRenderingContext): Texture;
+            private static translucentTexture;
+            static getTranslucentTexture(context: WebGLRenderingContext): Texture;
+            private static errorTexture;
+            static getErrorTexture(context: WebGLRenderingContext): Texture;
+        }
+        enum TextureFilter {
+            Nearest,
+            Linear,
+        }
+        interface ITextureParameters {
+            wrapS?: TextureWrapMode | "CLAMP_TO_EDGE" | "REPEAT" | "MIRRORED_REPEAT";
+            wrapT?: TextureWrapMode | "CLAMP_TO_EDGE" | "REPEAT" | "MIRRORED_REPEAT";
+            filter?: TextureFilter | "NEAREST" | "LINEAR";
+            mipmap?: boolean;
+        }
+        interface IColor {
+            r: number;
+            g: number;
+            b: number;
+            a?: number;
+        }
+        interface ITextureElement {
+            level: number;
+            frame?: number;
+            target?: TextureTarget | string;
+            url?: string;
+            color?: IColor;
+        }
+        interface ITextureInfo {
+            path?: string;
+            target: TextureTarget | string;
+            width?: number;
+            height?: number;
+            frames?: number;
+            params: ITextureParameters;
+            elements: ITextureElement[];
+        }
+        class TextureLoadable extends Texture implements ILoadable {
+            private readonly context;
+            readonly url: string;
+            private info;
+            private frameCount;
+            private nextElement;
+            private readyFrameCount;
+            private readyFrames;
+            private frameHandles;
+            private target;
+            private filter;
+            private mipmap;
+            private level0Width;
+            private level0Height;
+            private loadProgress;
+            constructor(context: WebGLRenderingContext, url: string);
+            getLoadProgress(): number;
+            hasMipLevel(level: number): boolean;
+            isLoaded(): boolean;
+            getWidth(level: number): number;
+            getHeight(level: number): number;
+            getFrameCount(): number;
+            toString(): string;
+            getTarget(): TextureTarget;
+            getHandle(frame?: number): WebGLTexture;
+            getLoadPriority(): number;
+            private canLoadImmediately(index);
+            private applyTexParameters();
+            private getOrCreateHandle(frame);
+            private static pixelBuffer;
+            private loadColorElement(target, level, color);
+            private loadImageElement(target, level, image);
+            private loadElement(element, value?);
+            loadFromInfo(info: ITextureInfo): void;
+            loadNext(callback: (requeue: boolean) => void): void;
+        }
+    }
+}
+declare namespace Facepunch {
+    namespace WebGame {
+        class TextureLoader extends Loader<TextureLoadable> {
+            private readonly context;
+            constructor(context: WebGLRenderingContext);
+            protected onCreateItem(url: string): TextureLoadable;
+        }
+    }
+}
+declare namespace Facepunch {
+    namespace WebGame {
+        interface IUniformCtor<TUniform extends Uniform> {
+            new (program: ShaderProgram, name: string): TUniform;
+        }
+        abstract class Uniform {
+            protected readonly context: WebGLRenderingContext;
+            protected readonly program: ShaderProgram;
+            private name;
+            private location;
+            private parameter;
+            isSampler: boolean;
+            constructor(program: ShaderProgram, name: string);
+            toString(): string;
+            getLocation(): WebGLUniformLocation;
+            reset(): void;
+            bufferParameter(buf: CommandBuffer, param: CommandBufferParameter): void;
+        }
+        class Uniform1F extends Uniform {
+            private x;
+            reset(): void;
+            bufferValue(buf: CommandBuffer, x: number): void;
+            set(x: number): void;
+        }
+        class Uniform1I extends Uniform {
+            private x;
+            reset(): void;
+            bufferValue(buf: CommandBuffer, x: number): void;
+            set(x: number): void;
+        }
+        class Uniform2F extends Uniform {
+            private x;
+            private y;
+            reset(): void;
+            bufferValue(buf: CommandBuffer, x: number, y: number): void;
+            set(x: number, y: number): void;
+        }
+        class Uniform3F extends Uniform {
+            private x;
+            private y;
+            private z;
+            reset(): void;
+            bufferValue(buf: CommandBuffer, x: number, y: number, z: number): void;
+            set(x: number, y: number, z: number): void;
+        }
+        class Uniform4F extends Uniform {
+            private x;
+            private y;
+            private z;
+            private w;
+            reset(): void;
+            bufferValue(buf: CommandBuffer, x: number, y: number, z: number, w: number): void;
+            set(x: number, y: number, z: number, w: number): void;
+        }
+        class UniformSampler extends Uniform {
+            private value;
+            private default;
+            private texUnit;
+            private sizeUniform;
+            constructor(program: ShaderProgram, name: string);
+            getSizeUniform(): Uniform4F;
+            hasSizeUniform(): boolean;
+            getTexUnit(): number;
+            setDefault(tex: Texture): void;
+            reset(): void;
+            bufferValue(buf: CommandBuffer, tex: Texture): void;
+            set(tex: Texture): void;
+        }
+        class UniformMatrix4 extends Uniform {
+            private transpose;
+            private values;
+            reset(): void;
+            bufferValue(buf: CommandBuffer, transpose: boolean, values: Float32Array): void;
+            set(transpose: boolean, values: Float32Array): void;
+        }
+    }
+}
+declare namespace Facepunch {
+    namespace WebGame {
+        enum AttributeType {
+            Float,
+        }
+        class VertexAttribute {
+            private static nextId;
+            static readonly position: VertexAttribute;
+            static readonly normal: VertexAttribute;
+            static readonly uv: VertexAttribute;
+            static readonly uv2: VertexAttribute;
+            static readonly rgb: VertexAttribute;
+            static readonly rgba: VertexAttribute;
+            static readonly alpha: VertexAttribute;
+            static compare(a: VertexAttribute, b: VertexAttribute): number;
+            readonly id: number;
+            readonly size: number;
+            readonly type: AttributeType;
+            readonly normalized: boolean;
+            constructor(size: number, type: AttributeType | string, normalized?: boolean);
         }
     }
 }
