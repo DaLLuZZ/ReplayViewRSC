@@ -1,6 +1,6 @@
 /// <reference path="facepunch.webgame.d.ts" />
 /// <reference path="sourceutils.d.ts" />
-declare namespace RSC {
+declare namespace ReplayViewRSC {
     enum SeekOrigin {
         Begin = 0,
         Current = 1,
@@ -23,7 +23,7 @@ declare namespace RSC {
         readVector3(vec?: Facepunch.Vector3): Facepunch.Vector3;
     }
 }
-declare namespace RSC {
+declare namespace ReplayViewRSC {
     type Handler<TEventArgs, TSender> = (args: TEventArgs, sender: TSender) => void;
     class Event<TEventArgs, TSender> {
         private readonly sender;
@@ -42,7 +42,7 @@ declare namespace RSC {
         update(value: TValue, args?: TEventArgs): void;
     }
 }
-declare namespace RSC {
+declare namespace ReplayViewRSC {
     class KeyDisplay {
         private readonly viewer;
         private readonly element;
@@ -66,7 +66,7 @@ declare namespace RSC {
         hide(): void;
     }
 }
-declare namespace RSC {
+declare namespace ReplayViewRSC {
     class OptionsMenu {
         private readonly viewer;
         readonly element: HTMLElement;
@@ -81,7 +81,7 @@ declare namespace RSC {
         private addToggleOption;
     }
 }
-declare namespace RSC {
+declare namespace ReplayViewRSC {
     class ReplayControls {
         private static readonly speedSliderValues;
         private readonly viewer;
@@ -109,7 +109,7 @@ declare namespace RSC {
         showSettings(): void;
     }
 }
-declare namespace RSC {
+declare namespace ReplayViewRSC {
     enum GlobalStyle {
         Normal = 0
     }
@@ -165,7 +165,7 @@ declare namespace RSC {
     }
 }
 import WebGame = Facepunch.WebGame;
-declare namespace RSC {
+declare namespace ReplayViewRSC {
     /**
      * Address hash format for the ReplayViewer.
      */
@@ -261,8 +261,8 @@ declare namespace RSC {
          * the map for the replay is loaded (if required).
          *
          * **Available event arguments**:
-         * * `replay: RSC.ReplayFile` - The newly loaded ReplayFile
-         * * `sender: RSC.ReplayViewer` - This ReplayViewer
+         * * `replay: ReplayViewRSC.ReplayFile` - The newly loaded ReplayFile
+         * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
          */
         readonly replayLoaded: Event<ReplayFile, ReplayViewer>;
         /**
@@ -270,15 +270,15 @@ declare namespace RSC {
          *
          * **Available event arguments**:
          * * `dt: number` - Time since the last update
-         * * `sender: RSC.ReplayViewer` - This ReplayViewer
+         * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
          */
         readonly updated: Event<number, ReplayViewer>;
         /**
          * Event invoked when the current tick has changed.
          *
          * **Available event arguments**:
-         * * `tickData: RSC.TickData` - Recorded data for the current tick
-         * * `sender: RSC.ReplayViewer` - This ReplayViewer
+         * * `tickData: ReplayViewRSC.TickData` - Recorded data for the current tick
+         * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
          */
         readonly tickChanged: ChangedEvent<number, TickData, ReplayViewer>;
         /**
@@ -287,7 +287,7 @@ declare namespace RSC {
          *
          * **Available event arguments**:
          * * `oldTick: number` - The previous value of `tick` before skipping
-         * * `sender: RSC.ReplayViewer` - This ReplayViewer
+         * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
          */
         readonly playbackSkipped: Event<number, ReplayViewer>;
         /**
@@ -295,7 +295,7 @@ declare namespace RSC {
          *
          * **Available event arguments**:
          * * `playbackRate: number` - The new playback rate
-         * * `sender: RSC.ReplayViewer` - This ReplayViewer
+         * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
          */
         readonly playbackRateChanged: ChangedEvent<number, number, ReplayViewer>;
         /**
@@ -304,7 +304,7 @@ declare namespace RSC {
          *
          * **Available event arguments**:
          * * `isPlaying: boolean` - True if currently playing
-         * * `sender: RSC.ReplayViewer` - This ReplayViewer
+         * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
          */
         readonly isPlayingChanged: ChangedEvent<boolean, boolean, ReplayViewer>;
         /**
@@ -312,7 +312,7 @@ declare namespace RSC {
          *
          * **Available event arguments**:
          * * `showCrosshair: boolean` - True if crosshair is now visible
-         * * `sender: RSC.ReplayViewer` - This ReplayViewer
+         * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
          */
         readonly showCrosshairChanged: ChangedEvent<boolean, boolean, ReplayViewer>;
         /**
@@ -320,7 +320,7 @@ declare namespace RSC {
          *
          * **Available event arguments**:
          * * `showKeyDisplay: boolean` - True if keyDisplay is now visible
-         * * `sender: RSC.ReplayViewer` - This ReplayViewer
+         * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
          */
         readonly showKeyDisplayChanged: ChangedEvent<boolean, boolean, ReplayViewer>;
         /**
@@ -328,7 +328,7 @@ declare namespace RSC {
          *
          * **Available event arguments**:
          * * `showOptions: boolean` - True if options menu is now visible
-         * * `sender: RSC.ReplayViewer` - This ReplayViewer
+         * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
          */
         readonly showOptionsChanged: ChangedEvent<boolean, boolean, ReplayViewer>;
         /**
@@ -336,7 +336,7 @@ declare namespace RSC {
          *
          * **Available event arguments**:
          * * `cameraMode: SourceUtils.CameraMode` - Camera mode value
-         * * `sender: RSC.ReplayViewer` - This ReplayViewer
+         * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
          */
         readonly cameraModeChanged: ChangedEvent<SourceUtils.CameraMode, SourceUtils.CameraMode, ReplayViewer>;
         private messageElem;
@@ -386,7 +386,7 @@ declare namespace RSC {
         protected onUpdateFrame(dt: number): void;
     }
 }
-declare namespace RSC {
+declare namespace ReplayViewRSC {
     class RouteLine extends SourceUtils.Entities.PvsEntity {
         private static readonly segmentTicks;
         private readonly segments;
@@ -398,7 +398,7 @@ declare namespace RSC {
         dispose(): void;
     }
 }
-declare namespace RSC {
+declare namespace ReplayViewRSC {
     class Utils {
         static deltaAngle(a: number, b: number): number;
         static hermiteValue(p0: number, p1: number, p2: number, p3: number, t: number): number;

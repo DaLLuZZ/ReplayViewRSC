@@ -13,14 +13,14 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var RSC;
-(function (RSC) {
+var ReplayViewRSC;
+(function (ReplayViewRSC) {
     var SeekOrigin;
     (function (SeekOrigin) {
         SeekOrigin[SeekOrigin["Begin"] = 0] = "Begin";
         SeekOrigin[SeekOrigin["Current"] = 1] = "Current";
         SeekOrigin[SeekOrigin["End"] = 2] = "End";
-    })(SeekOrigin = RSC.SeekOrigin || (RSC.SeekOrigin = {}));
+    })(SeekOrigin = ReplayViewRSC.SeekOrigin || (ReplayViewRSC.SeekOrigin = {}));
     var BinaryReader = /** @class */ (function () {
         function BinaryReader(buffer) {
             this.buffer = buffer;
@@ -130,10 +130,10 @@ var RSC;
         };
         return BinaryReader;
     }());
-    RSC.BinaryReader = BinaryReader;
-})(RSC || (RSC = {}));
-var RSC;
-(function (RSC) {
+    ReplayViewRSC.BinaryReader = BinaryReader;
+})(ReplayViewRSC || (ReplayViewRSC = {}));
+var ReplayViewRSC;
+(function (ReplayViewRSC) {
     var Event = /** @class */ (function () {
         function Event(sender) {
             this.handlers = [];
@@ -160,7 +160,7 @@ var RSC;
         };
         return Event;
     }());
-    RSC.Event = Event;
+    ReplayViewRSC.Event = Event;
     var ChangedEvent = /** @class */ (function (_super) {
         __extends(ChangedEvent, _super);
         function ChangedEvent(sender, equalityComparison) {
@@ -184,17 +184,17 @@ var RSC;
         };
         return ChangedEvent;
     }(Event));
-    RSC.ChangedEvent = ChangedEvent;
-})(RSC || (RSC = {}));
-var RSC;
-(function (RSC) {
+    ReplayViewRSC.ChangedEvent = ChangedEvent;
+})(ReplayViewRSC || (ReplayViewRSC = {}));
+var ReplayViewRSC;
+(function (ReplayViewRSC) {
     var KeyDisplay = /** @class */ (function () {
         function KeyDisplay(viewer, container) {
             var _this = this;
             this.buttonMap = {};
             this.syncSampleRange = 4;
             this.speedSampleRange = 1 / 8;
-            this.tempTickData = new RSC.TickData();
+            this.tempTickData = new ReplayViewRSC.TickData();
             this.tempPosition = new Facepunch.Vector3();
             this.syncBuffer = [];
             this.syncIndex = 0;
@@ -207,13 +207,13 @@ var RSC;
             element.classList.add("key-display");
             element.innerHTML = "\n                <div class=\"stat sync-outer\">Sync: <span class=\"value sync-value\">0.0</span> %</div>\n                <div class=\"stat speed-outer\">Speed: <span class=\"value speed-value\">000</span> u/s</div>\n                <div class=\"key key-w\">W</div>\n                <div class=\"key key-a\">A</div>\n                <div class=\"key key-s\">S</div>\n                <div class=\"key key-d\">D</div>\n                <div class=\"key key-walk\">Walk</div>\n                <div class=\"key key-duck\">Duck</div>\n                <div class=\"key key-jump\">Jump</div>";
             container.appendChild(element);
-            this.buttonMap[RSC.Button.Forward] = element.getElementsByClassName("key-w")[0];
-            this.buttonMap[RSC.Button.MoveLeft] = element.getElementsByClassName("key-a")[0];
-            this.buttonMap[RSC.Button.Back] = element.getElementsByClassName("key-s")[0];
-            this.buttonMap[RSC.Button.MoveRight] = element.getElementsByClassName("key-d")[0];
-            this.buttonMap[RSC.Button.Walk] = element.getElementsByClassName("key-walk")[0];
-            this.buttonMap[RSC.Button.Duck] = element.getElementsByClassName("key-duck")[0];
-            this.buttonMap[RSC.Button.Jump] = element.getElementsByClassName("key-jump")[0];
+            this.buttonMap[ReplayViewRSC.Button.Forward] = element.getElementsByClassName("key-w")[0];
+            this.buttonMap[ReplayViewRSC.Button.MoveLeft] = element.getElementsByClassName("key-a")[0];
+            this.buttonMap[ReplayViewRSC.Button.Back] = element.getElementsByClassName("key-s")[0];
+            this.buttonMap[ReplayViewRSC.Button.MoveRight] = element.getElementsByClassName("key-d")[0];
+            this.buttonMap[ReplayViewRSC.Button.Walk] = element.getElementsByClassName("key-walk")[0];
+            this.buttonMap[ReplayViewRSC.Button.Duck] = element.getElementsByClassName("key-duck")[0];
+            this.buttonMap[ReplayViewRSC.Button.Jump] = element.getElementsByClassName("key-jump")[0];
             this.syncValueElem = element.getElementsByClassName("sync-value")[0];
             this.speedValueElem = element.getElementsByClassName("speed-value")[0];
             viewer.showKeyDisplayChanged.addListener(function (showKeyDisplay) {
@@ -314,10 +314,10 @@ var RSC;
         };
         return KeyDisplay;
     }());
-    RSC.KeyDisplay = KeyDisplay;
-})(RSC || (RSC = {}));
-var RSC;
-(function (RSC) {
+    ReplayViewRSC.KeyDisplay = KeyDisplay;
+})(ReplayViewRSC || (ReplayViewRSC = {}));
+var ReplayViewRSC;
+(function (ReplayViewRSC) {
     var OptionsMenu = /** @class */ (function () {
         function OptionsMenu(viewer, container) {
             var _this = this;
@@ -393,10 +393,10 @@ var RSC;
         };
         return OptionsMenu;
     }());
-    RSC.OptionsMenu = OptionsMenu;
-})(RSC || (RSC = {}));
-var RSC;
-(function (RSC) {
+    ReplayViewRSC.OptionsMenu = OptionsMenu;
+})(ReplayViewRSC || (ReplayViewRSC = {}));
+var ReplayViewRSC;
+(function (ReplayViewRSC) {
     var ReplayControls = /** @class */ (function () {
         function ReplayControls(viewer) {
             var _this = this;
@@ -543,14 +543,14 @@ var RSC;
         ReplayControls.speedSliderValues = [-5, -1, 0.1, 0.25, 1, 2, 5, 10];
         return ReplayControls;
     }());
-    RSC.ReplayControls = ReplayControls;
-})(RSC || (RSC = {}));
-var RSC;
-(function (RSC) {
+    ReplayViewRSC.ReplayControls = ReplayControls;
+})(ReplayViewRSC || (ReplayViewRSC = {}));
+var ReplayViewRSC;
+(function (ReplayViewRSC) {
     var GlobalStyle;
     (function (GlobalStyle) {
         GlobalStyle[GlobalStyle["Normal"] = 0] = "Normal";
-    })(GlobalStyle = RSC.GlobalStyle || (RSC.GlobalStyle = {}));
+    })(GlobalStyle = ReplayViewRSC.GlobalStyle || (ReplayViewRSC.GlobalStyle = {}));
     var Button;
     (function (Button) {
         Button[Button["Attack"] = 1] = "Attack";
@@ -578,7 +578,7 @@ var RSC;
         Button[Button["BullRush"] = 4194304] = "BullRush";
         Button[Button["Grenade1"] = 8388608] = "Grenade1";
         Button[Button["Grenade2"] = 16777216] = "Grenade2";
-    })(Button = RSC.Button || (RSC.Button = {}));
+    })(Button = ReplayViewRSC.Button || (ReplayViewRSC.Button = {}));
     var TickData = /** @class */ (function () {
         function TickData() {
             this.position = new Facepunch.Vector3();
@@ -591,10 +591,10 @@ var RSC;
         };
         return TickData;
     }());
-    RSC.TickData = TickData;
+    ReplayViewRSC.TickData = TickData;
     var ReplayFile = /** @class */ (function () {
         function ReplayFile(data, fileName) {
-            var reader = this.reader = new RSC.BinaryReader(data);
+            var reader = this.reader = new ReplayViewRSC.BinaryReader(data);
             var magic = reader.readUint32();
             if (magic !== ReplayFile.MAGIC) {
                 throw "problem " + magic + " " + ReplayFile.MAGIC;
@@ -615,7 +615,7 @@ var RSC;
                 data = new TickData();
             data.tick = tick;
             var reader = this.reader;
-            reader.seek(this.firstTickOffset + this.tickSize * tick, RSC.SeekOrigin.Begin);
+            reader.seek(this.firstTickOffset + this.tickSize * tick, ReplayViewRSC.SeekOrigin.Begin);
             data.buttons = reader.readInt32();
             reader.readString(28); // DALLUZZ
             reader.readVector2(data.angles);
@@ -628,13 +628,13 @@ var RSC;
         ReplayFile.MAGIC = 0xBAADF00D;
         return ReplayFile;
     }());
-    RSC.ReplayFile = ReplayFile;
-})(RSC || (RSC = {}));
+    ReplayViewRSC.ReplayFile = ReplayFile;
+})(ReplayViewRSC || (ReplayViewRSC = {}));
 ///<reference path="../js/facepunch.webgame.d.ts"/>
 ///<reference path="../js/sourceutils.d.ts"/>
 var WebGame = Facepunch.WebGame;
-var RSC;
-(function (RSC) {
+var ReplayViewRSC;
+(function (ReplayViewRSC) {
     /**
      * Creates a GOKZ replay viewer applet.
      */
@@ -704,96 +704,96 @@ var RSC;
              * the map for the replay is loaded (if required).
              *
              * **Available event arguments**:
-             * * `replay: RSC.ReplayFile` - The newly loaded ReplayFile
-             * * `sender: RSC.ReplayViewer` - This ReplayViewer
+             * * `replay: ReplayViewRSC.ReplayFile` - The newly loaded ReplayFile
+             * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
              */
-            _this.replayLoaded = new RSC.Event(_this);
+            _this.replayLoaded = new ReplayViewRSC.Event(_this);
             /**
              * Event invoked after each update.
              *
              * **Available event arguments**:
              * * `dt: number` - Time since the last update
-             * * `sender: RSC.ReplayViewer` - This ReplayViewer
+             * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
              */
-            _this.updated = new RSC.Event(_this);
+            _this.updated = new ReplayViewRSC.Event(_this);
             /**
              * Event invoked when the current tick has changed.
              *
              * **Available event arguments**:
-             * * `tickData: RSC.TickData` - Recorded data for the current tick
-             * * `sender: RSC.ReplayViewer` - This ReplayViewer
+             * * `tickData: ReplayViewRSC.TickData` - Recorded data for the current tick
+             * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
              */
-            _this.tickChanged = new RSC.ChangedEvent(_this);
+            _this.tickChanged = new ReplayViewRSC.ChangedEvent(_this);
             /**
              * Event invoked when playback has skipped to a different tick, for
              * example when the user uses the scrubber.
              *
              * **Available event arguments**:
              * * `oldTick: number` - The previous value of `tick` before skipping
-             * * `sender: RSC.ReplayViewer` - This ReplayViewer
+             * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
              */
-            _this.playbackSkipped = new RSC.Event(_this);
+            _this.playbackSkipped = new ReplayViewRSC.Event(_this);
             /**
              * Event invoked when `playbackRate` changes.
              *
              * **Available event arguments**:
              * * `playbackRate: number` - The new playback rate
-             * * `sender: RSC.ReplayViewer` - This ReplayViewer
+             * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
              */
-            _this.playbackRateChanged = new RSC.ChangedEvent(_this);
+            _this.playbackRateChanged = new ReplayViewRSC.ChangedEvent(_this);
             /**
              * Event invoked when `isPlaying` changes, for example when the user
              * pauses or resumes playback.
              *
              * **Available event arguments**:
              * * `isPlaying: boolean` - True if currently playing
-             * * `sender: RSC.ReplayViewer` - This ReplayViewer
+             * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
              */
-            _this.isPlayingChanged = new RSC.ChangedEvent(_this);
+            _this.isPlayingChanged = new ReplayViewRSC.ChangedEvent(_this);
             /**
              * Event invoked when `showCrosshair` changes.
              *
              * **Available event arguments**:
              * * `showCrosshair: boolean` - True if crosshair is now visible
-             * * `sender: RSC.ReplayViewer` - This ReplayViewer
+             * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
              */
-            _this.showCrosshairChanged = new RSC.ChangedEvent(_this);
+            _this.showCrosshairChanged = new ReplayViewRSC.ChangedEvent(_this);
             /**
              * Event invoked when `showKeyDisplay` changes.
              *
              * **Available event arguments**:
              * * `showKeyDisplay: boolean` - True if keyDisplay is now visible
-             * * `sender: RSC.ReplayViewer` - This ReplayViewer
+             * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
              */
-            _this.showKeyDisplayChanged = new RSC.ChangedEvent(_this);
+            _this.showKeyDisplayChanged = new ReplayViewRSC.ChangedEvent(_this);
             /**
              * Event invoked when `showOptions` changes.
              *
              * **Available event arguments**:
              * * `showOptions: boolean` - True if options menu is now visible
-             * * `sender: RSC.ReplayViewer` - This ReplayViewer
+             * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
              */
-            _this.showOptionsChanged = new RSC.ChangedEvent(_this);
+            _this.showOptionsChanged = new ReplayViewRSC.ChangedEvent(_this);
             /**
              * Event invoked when `cameraMode` changes.
              *
              * **Available event arguments**:
              * * `cameraMode: SourceUtils.CameraMode` - Camera mode value
-             * * `sender: RSC.ReplayViewer` - This ReplayViewer
+             * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
              */
-            _this.cameraModeChanged = new RSC.ChangedEvent(_this);
+            _this.cameraModeChanged = new ReplayViewRSC.ChangedEvent(_this);
             _this.pauseTime = 1.0;
             _this.spareTime = 0;
             _this.prevTick = undefined;
-            _this.tickData = new RSC.TickData();
-            _this.tempTickData0 = new RSC.TickData();
-            _this.tempTickData1 = new RSC.TickData();
-            _this.tempTickData2 = new RSC.TickData();
+            _this.tickData = new ReplayViewRSC.TickData();
+            _this.tempTickData0 = new ReplayViewRSC.TickData();
+            _this.tempTickData1 = new ReplayViewRSC.TickData();
+            _this.tempTickData2 = new ReplayViewRSC.TickData();
             _this.ignoreMouseUp = true;
             _this.saveCameraPosInHash = false;
-            _this.controls = new RSC.ReplayControls(_this);
-            _this.keyDisplay = new RSC.KeyDisplay(_this, _this.controls.playbackBarElem);
-            _this.options = new RSC.OptionsMenu(_this, _this.controls.playbackBarElem);
+            _this.controls = new ReplayViewRSC.ReplayControls(_this);
+            _this.keyDisplay = new ReplayViewRSC.KeyDisplay(_this, _this.controls.playbackBarElem);
+            _this.options = new ReplayViewRSC.OptionsMenu(_this, _this.controls.playbackBarElem);
             var crosshair = document.createElement("div");
             crosshair.classList.add("crosshair");
             container.appendChild(crosshair);
@@ -860,7 +860,7 @@ var RSC;
                         _this.routeLine = null;
                     }
                     try {
-                        _this.replay = new RSC.ReplayFile(arrayBuffer, url);
+                        _this.replay = new ReplayViewRSC.ReplayFile(arrayBuffer, url);
                     }
                     catch (e) {
                         _this.showMessage("Unable to read replay: ".concat(e));
@@ -996,7 +996,7 @@ var RSC;
                 this.playbackSkipped.dispatch(this.prevTick);
             }
             if (this.routeLine == null && this.map.isReady()) {
-                this.routeLine = new RSC.RouteLine(this.map, this.replay);
+                this.routeLine = new ReplayViewRSC.RouteLine(this.map, this.replay);
             }
             if (this.map.isReady() && this.isPlaying && !this.isScrubbing) {
                 this.spareTime += dt * this.playbackRate;
@@ -1031,9 +1031,9 @@ var RSC;
                 var d1 = this.tickData;
                 var d2 = replay.getTickData(replay.clampTick(this.tick + 1), this.tempTickData1);
                 var d3 = replay.getTickData(replay.clampTick(this.tick + 2), this.tempTickData2);
-                RSC.Utils.hermitePosition(d0.position, d1.position, d2.position, d3.position, t, this.tickData.position);
-                RSC.Utils.hermiteAngles(d0.angles, d1.angles, d2.angles, d3.angles, t, this.tickData.angles);
-                eyeHeight = RSC.Utils.hermiteValue(d0.getEyeHeight(), d1.getEyeHeight(), d2.getEyeHeight(), d3.getEyeHeight(), t);
+                ReplayViewRSC.Utils.hermitePosition(d0.position, d1.position, d2.position, d3.position, t, this.tickData.position);
+                ReplayViewRSC.Utils.hermiteAngles(d0.angles, d1.angles, d2.angles, d3.angles, t, this.tickData.angles);
+                eyeHeight = ReplayViewRSC.Utils.hermiteValue(d0.getEyeHeight(), d1.getEyeHeight(), d2.getEyeHeight(), d3.getEyeHeight(), t);
             }
             if (this.cameraMode === SourceUtils.CameraMode.Fixed) {
                 this.mainCamera.setPosition(this.tickData.position.x, this.tickData.position.y, this.tickData.position.z + eyeHeight);
@@ -1043,17 +1043,17 @@ var RSC;
         };
         return ReplayViewer;
     }(SourceUtils.MapViewer));
-    RSC.ReplayViewer = ReplayViewer;
-})(RSC || (RSC = {}));
-var RSC;
-(function (RSC) {
+    ReplayViewRSC.ReplayViewer = ReplayViewer;
+})(ReplayViewRSC || (ReplayViewRSC = {}));
+var ReplayViewRSC;
+(function (ReplayViewRSC) {
     var RouteLine = /** @class */ (function (_super) {
         __extends(RouteLine, _super);
         function RouteLine(map, replay) {
             var _this = _super.call(this, map, { classname: "route_line", clusters: null }) || this;
             _this.isVisible = false;
             _this.segments = new Array(Math.ceil(replay.tickCount / RouteLine.segmentTicks));
-            var tickData = new RSC.TickData();
+            var tickData = new ReplayViewRSC.TickData();
             var progressScale = 16 / replay.tickRate;
             var lastPos = new Facepunch.Vector3();
             var currPos = new Facepunch.Vector3();
@@ -1138,10 +1138,10 @@ var RSC;
         RouteLine.segmentTicks = 60 * 128;
         return RouteLine;
     }(SourceUtils.Entities.PvsEntity));
-    RSC.RouteLine = RouteLine;
-})(RSC || (RSC = {}));
-var RSC;
-(function (RSC) {
+    ReplayViewRSC.RouteLine = RouteLine;
+})(ReplayViewRSC || (ReplayViewRSC = {}));
+var ReplayViewRSC;
+(function (ReplayViewRSC) {
     var Utils = /** @class */ (function () {
         function Utils() {
         }
@@ -1167,5 +1167,5 @@ var RSC;
         };
         return Utils;
     }());
-    RSC.Utils = Utils;
-})(RSC || (RSC = {}));
+    ReplayViewRSC.Utils = Utils;
+})(ReplayViewRSC || (ReplayViewRSC = {}));
