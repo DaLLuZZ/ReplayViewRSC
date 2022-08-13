@@ -1,0 +1,24 @@
+name: Build
+on: workflow_dispatch
+
+jobs:
+  build-push:
+    runs-on: ubuntu-latest
+    name: Builds Typescript
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Update Dependencies
+        run: |
+          rm ./js/*.*
+          wget https://raw.githubusercontent.com/DaLLuZZ/Facepunch.WebGame/master/js/facepunch.webgame.d.ts -P ./js/
+          wget https://raw.githubusercontent.com/DaLLuZZ/SourceUtils/master/SourceUtils.WebExport/Resources/js/sourceutils.d.ts -P ./js/
+
+      - name: Building Typescript
+        uses: FuLagann/tsc-build-push@v1
+        with:
+          user-name: "DaLLuZZ"
+          user-email: "khrushiov2012@yandex.ru"
+          message: "Automatic build"
+          directories: ./
