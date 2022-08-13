@@ -1,4 +1,4 @@
-namespace RSC {
+namespace ReplayViewRSC {
     export class OptionsMenu {
         private readonly viewer: ReplayViewer;
 

@@ -3,7 +3,7 @@
 
 import WebGame = Facepunch.WebGame;
 
-namespace RSC {
+namespace ReplayViewRSC {
     /**
      * Address hash format for the ReplayViewer.
      */
@@ -114,8 +114,8 @@ namespace RSC {
          * the map for the replay is loaded (if required).
          * 
          * **Available event arguments**:
-         * * `replay: RSC.ReplayFile` - The newly loaded ReplayFile
-         * * `sender: RSC.ReplayViewer` - This ReplayViewer
+         * * `replay: ReplayViewRSC.ReplayFile` - The newly loaded ReplayFile
+         * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
          */
         readonly replayLoaded = new Event<ReplayFile, ReplayViewer>(this);
 
@@ -124,7 +124,7 @@ namespace RSC {
          * 
          * **Available event arguments**:
          * * `dt: number` - Time since the last update
-         * * `sender: RSC.ReplayViewer` - This ReplayViewer
+         * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
          */
         readonly updated = new Event<number, ReplayViewer>(this);
 
@@ -132,8 +132,8 @@ namespace RSC {
          * Event invoked when the current tick has changed.
          * 
          * **Available event arguments**:
-         * * `tickData: RSC.TickData` - Recorded data for the current tick
-         * * `sender: RSC.ReplayViewer` - This ReplayViewer
+         * * `tickData: ReplayViewRSC.TickData` - Recorded data for the current tick
+         * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
          */
         readonly tickChanged = new ChangedEvent<number, TickData, ReplayViewer>(this);
 
@@ -143,7 +143,7 @@ namespace RSC {
          * 
          * **Available event arguments**:
          * * `oldTick: number` - The previous value of `tick` before skipping
-         * * `sender: RSC.ReplayViewer` - This ReplayViewer
+         * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
          */
         readonly playbackSkipped = new Event<number, ReplayViewer>(this);
 
@@ -152,7 +152,7 @@ namespace RSC {
          * 
          * **Available event arguments**:
          * * `playbackRate: number` - The new playback rate
-         * * `sender: RSC.ReplayViewer` - This ReplayViewer
+         * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
          */
         readonly playbackRateChanged = new ChangedEvent<number, number, ReplayViewer>(this);
 
@@ -162,7 +162,7 @@ namespace RSC {
          * 
          * **Available event arguments**:
          * * `isPlaying: boolean` - True if currently playing
-         * * `sender: RSC.ReplayViewer` - This ReplayViewer
+         * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
          */
         readonly isPlayingChanged = new ChangedEvent<boolean, boolean, ReplayViewer>(this);
 
@@ -171,7 +171,7 @@ namespace RSC {
          * 
          * **Available event arguments**:
          * * `showCrosshair: boolean` - True if crosshair is now visible
-         * * `sender: RSC.ReplayViewer` - This ReplayViewer
+         * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
          */
         readonly showCrosshairChanged = new ChangedEvent<boolean, boolean, ReplayViewer>(this);
 
@@ -180,7 +180,7 @@ namespace RSC {
          * 
          * **Available event arguments**:
          * * `showKeyDisplay: boolean` - True if keyDisplay is now visible
-         * * `sender: RSC.ReplayViewer` - This ReplayViewer
+         * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
          */
         readonly showKeyDisplayChanged = new ChangedEvent<boolean, boolean, ReplayViewer>(this);
 
@@ -189,7 +189,7 @@ namespace RSC {
          * 
          * **Available event arguments**:
          * * `showOptions: boolean` - True if options menu is now visible
-         * * `sender: RSC.ReplayViewer` - This ReplayViewer
+         * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
          */
         readonly showOptionsChanged = new ChangedEvent<boolean, boolean, ReplayViewer>(this);
 
@@ -198,7 +198,7 @@ namespace RSC {
          * 
          * **Available event arguments**:
          * * `cameraMode: SourceUtils.CameraMode` - Camera mode value
-         * * `sender: RSC.ReplayViewer` - This ReplayViewer
+         * * `sender: ReplayViewRSC.ReplayViewer` - This ReplayViewer
          */
         readonly cameraModeChanged = new ChangedEvent<SourceUtils.CameraMode, SourceUtils.CameraMode, ReplayViewer>(this);
 

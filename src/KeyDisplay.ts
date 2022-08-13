@@ -1,4 +1,4 @@
-namespace RSC {
+namespace ReplayViewRSC {
     export class KeyDisplay {
         private readonly viewer: ReplayViewer;
 

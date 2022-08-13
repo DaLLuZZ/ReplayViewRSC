@@ -1,4 +1,4 @@
-namespace RSC {
+namespace ReplayViewRSC {
     interface IRouteLineSegment {
         debugLine: WebGame.DebugLine;
         clusters: {[index: number]: boolean};

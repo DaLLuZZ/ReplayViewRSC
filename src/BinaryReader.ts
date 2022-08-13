@@ -1,4 +1,4 @@
-namespace RSC {
+namespace ReplayViewRSC {
     export enum SeekOrigin {
         Begin,
         Current,

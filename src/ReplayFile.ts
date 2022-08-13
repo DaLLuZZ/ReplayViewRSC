@@ -1,4 +1,4 @@
-namespace RSC {
+namespace ReplayViewRSC {
     export enum GlobalStyle {
         Normal = 0
     }

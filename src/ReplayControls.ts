@@ -1,4 +1,4 @@
-namespace RSC {
+namespace ReplayViewRSC {
     export class ReplayControls {
         private static readonly speedSliderValues = [-5, -1, 0.1, 0.25, 1, 2, 5, 10];
 
