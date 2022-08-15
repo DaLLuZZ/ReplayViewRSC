@@ -292,10 +292,10 @@ var ReplayViewRSC;
         };
         KeyDisplay.prototype.getSpeedAtTick = function (tick) {
             var replay = this.viewer.replay;
-            var tickData = this.tempTickData;
-            var velocity = this.tempPosition;
+            var tickData;
+            var velocity;
             replay.getTickData(tick, tickData);
-            velocity.copy(tickData.position);
+            velocity.copy(tickData.velocity);
             // Ignore vertical speed (XY)
             velocity.z = 0;
             return velocity.length();
@@ -303,7 +303,6 @@ var ReplayViewRSC;
         KeyDisplay.prototype.updateSpeed = function () {
             // TODO: cache
             var replay = this.viewer.replay;
-            var maxTickRange = Math.ceil(this.speedSampleRange * replay.tickRate);
             var speedString = Math.round(this.getSpeedAtTick(this.viewer.tick)).toString();
             for (; speedString.length < 3; speedString = "0" + speedString)
                 ;
