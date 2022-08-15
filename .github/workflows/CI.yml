@@ -23,6 +23,14 @@ jobs:
           message: "Automatic build"
           directories: ./
 
-      - name: Purge CDN Cache
+      - name: Update JS on GitHub Pages
         run: |
-          curl https://purge.jsdelivr.net/gh/DaLLuZZ/ReplayViewRSC@latest/js/replayviewer.js
+          git checkout gh-pages
+          wget https://raw.githubusercontent.com/DaLLuZZ/Facepunch.WebGame/master/js/facepunch.webgame.js -P ./js/
+          wget https://raw.githubusercontent.com/DaLLuZZ/SourceUtils/master/SourceUtils.WebExport/Resources/js/sourceutils.js -P ./js/
+          wget https://raw.githubusercontent.com/DaLLuZZ/SourceUtils/master/SourceUtils.WebExport/Resources/js/sourceutils.js -P ./js/
+          git config user.name DaLLuZZ
+          git config user.email khrushiov2012@yandex.ru
+          git add .
+          git commit -m "Automatic JS update"
+          git push
