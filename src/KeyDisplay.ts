@@ -133,7 +133,7 @@ namespace ReplayViewRSC {
             const tickData = new TickData();
             const velocity = new Facepunch.Vector3();
 
-            replay.getTickData(tick, tickData);
+            replay.getTickData(replay.clampTick(tick), tickData);
             velocity.copy(tickData.velocity);
 
             // Ignore vertical speed (XY)
