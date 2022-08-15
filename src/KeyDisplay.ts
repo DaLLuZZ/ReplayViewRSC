@@ -146,7 +146,6 @@ namespace ReplayViewRSC {
             // TODO: cache
 
             const replay = this.viewer.replay;
-            const maxTickRange = Math.ceil(this.speedSampleRange * replay.tickRate);
 
             let speedString = Math.round(this.getSpeedAtTick(this.viewer.tick)).toString();
 
