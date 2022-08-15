@@ -60,7 +60,7 @@
 
                 viewer.replayLoaded.addListener(function(replay) {
 
-                    var title = replay.playerName + " - " + replay.time + " on " + replay.mapName;
+                    var title = "[" + replay.tickRate + "t] | " + replay.playerName + " - " + replay.time + " on " + replay.mapName;
 
                     document.getElementById("title").innerText = title;
                     document.title = title;
