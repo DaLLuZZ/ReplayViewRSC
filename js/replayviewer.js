@@ -273,9 +273,9 @@ var ReplayViewRSC;
             }
             var min = replay.clampTick(Math.min(this.lastTick, this.viewer.tick) - 1);
             var max = replay.clampTick(Math.max(this.lastTick, this.viewer.tick));
-            var prevSpeed = this.getSpeedAtTick(min, 1);
+            var prevSpeed = this.getSpeedAtTick(min);
             for (var i = min + 1; i <= max; ++i) {
-                var nextSpeed = this.getSpeedAtTick(i, 1);
+                var nextSpeed = this.getSpeedAtTick(i);
                 syncBuffer[this.syncIndex] = nextSpeed > prevSpeed;
                 this.syncIndex = this.syncIndex >= maxSamples - 1 ? 0 : this.syncIndex + 1;
                 this.syncSampleCount = Math.min(this.syncSampleCount + 1, maxSamples);
@@ -290,26 +290,21 @@ var ReplayViewRSC;
             syncFraction /= Math.max(this.syncSampleCount, 1);
             this.syncValueElem.innerText = (syncFraction * 100).toFixed(1);
         };
-        KeyDisplay.prototype.getSpeedAtTick = function (tick, tickRange) {
+        KeyDisplay.prototype.getSpeedAtTick = function (tick) {
             var replay = this.viewer.replay;
-            var firstTick = replay.clampTick(tick - Math.ceil(tickRange / 2));
-            var lastTick = replay.clampTick(firstTick + tickRange);
-            tickRange = lastTick - firstTick;
             var tickData = this.tempTickData;
-            var position = this.tempPosition;
-            replay.getTickData(lastTick, tickData);
-            position.copy(tickData.position);
-            replay.getTickData(firstTick, tickData);
-            position.sub(tickData.position);
-            // Ignore vertical speed
-            position.z = 0;
-            return position.length() * replay.tickRate / Math.max(1, lastTick - firstTick);
+            var velocity = this.tempPosition;
+            replay.getTickData(tick, tickData);
+            velocity.copy(tickData.position);
+            // Ignore vertical speed (XY)
+            velocity.z = 0;
+            return velocity.length();
         };
         KeyDisplay.prototype.updateSpeed = function () {
             // TODO: cache
             var replay = this.viewer.replay;
             var maxTickRange = Math.ceil(this.speedSampleRange * replay.tickRate);
-            var speedString = Math.round(this.getSpeedAtTick(this.viewer.tick, maxTickRange)).toString();
+            var speedString = Math.round(this.getSpeedAtTick(this.viewer.tick)).toString();
             for (; speedString.length < 3; speedString = "0" + speedString)
                 ;
             this.speedValueElem.innerText = speedString;
