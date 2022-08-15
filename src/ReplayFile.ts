@@ -40,6 +40,7 @@ namespace ReplayViewRSC {
 
     export class TickData {
         readonly position = new Facepunch.Vector3();
+        readonly velocity = new Facepunch.Vector3();
         readonly angles = new Facepunch.Vector2();
         tick = -1;
         buttons: Button = 0;
@@ -80,7 +81,7 @@ namespace ReplayViewRSC {
             this.time = reader.readString();
             this.playerName = reader.readString();
 
-            reader.readString(24); // DALLUZZ
+            reader.moveOffset(24);
 
             this.tickCount = reader.readInt32();
             if (fileName.includes("/66tick/")
@@ -103,9 +104,9 @@ namespace ReplayViewRSC {
             reader.seek(this.firstTickOffset + this.tickSize * tick, SeekOrigin.Begin);
 
             data.buttons = reader.readInt32();
-            
-            reader.readString(28); // DALLUZZ
-
+            reader.moveOffset(4);
+            reader.readVector3(data.velocity);
+            reader.moveOffset(12);
             reader.readVector2(data.angles);
             reader.readVector3(data.position);
 
