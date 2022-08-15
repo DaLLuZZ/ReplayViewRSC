@@ -40,6 +40,14 @@ var ReplayViewRSC;
         BinaryReader.prototype.getOffset = function () {
             return this.offset;
         };
+        BinaryReader.prototype.moveOffset = function (offset) {
+            if (!offset)
+                return;
+            else if (offset < 0 && Math.abs(offset) > this.offset)
+                this.offset = 0;
+            else
+                this.offset += offset;
+        };
         BinaryReader.prototype.readUint8 = function () {
             var value = this.view.getUint8(this.offset);
             this.offset += 1;
@@ -550,6 +558,13 @@ var ReplayViewRSC;
     var GlobalStyle;
     (function (GlobalStyle) {
         GlobalStyle[GlobalStyle["Normal"] = 0] = "Normal";
+        GlobalStyle[GlobalStyle["SW"] = 1] = "SW";
+        GlobalStyle[GlobalStyle["HSW"] = 2] = "HSW";
+        GlobalStyle[GlobalStyle["BW"] = 3] = "BW";
+        GlobalStyle[GlobalStyle["LG"] = 4] = "LG";
+        GlobalStyle[GlobalStyle["SM"] = 5] = "SM";
+        GlobalStyle[GlobalStyle["FFW"] = 6] = "FFW";
+        GlobalStyle[GlobalStyle["FS"] = 7] = "FS";
     })(GlobalStyle = ReplayViewRSC.GlobalStyle || (ReplayViewRSC.GlobalStyle = {}));
     var Button;
     (function (Button) {
@@ -582,6 +597,7 @@ var ReplayViewRSC;
     var TickData = /** @class */ (function () {
         function TickData() {
             this.position = new Facepunch.Vector3();
+            this.velocity = new Facepunch.Vector3();
             this.angles = new Facepunch.Vector2();
             this.tick = -1;
             this.buttons = 0;
@@ -597,16 +613,21 @@ var ReplayViewRSC;
             var reader = this.reader = new ReplayViewRSC.BinaryReader(data);
             var magic = reader.readUint32();
             if (magic !== ReplayFile.MAGIC) {
-                throw "problem " + magic + " " + ReplayFile.MAGIC;
+                throw "Unknown replay file format!";
             }
             this.formatVersion = reader.readUint8();
             this.mapName = fileName.substring(fileName.search(/surf_/g), fileName.search(/_bonus_/g) != -1 ? fileName.search(/_bonus_/g) : (fileName.search(/_stage_/g) != -1 ? fileName.search(/_stage_/g) : (fileName.search(/_style_/g) != -1 ? fileName.search(/_style_/g) : fileName.search(/.rec/g))));
-            //           this.style = reader.readInt32() as GlobalStyle;
+            this.style = (fileName.search(/_style_/g) != -1 ? parseInt(fileName.substring(fileName.search(/_style_/g) + 7, fileName.search(/_style_/g) + 8)) : 0);
             this.time = reader.readString();
             this.playerName = reader.readString();
-            reader.readString(24); // DALLUZZ
+            reader.moveOffset(24);
             this.tickCount = reader.readInt32();
-            this.tickRate = 85; // DALLUZZ
+            if (fileName.search(/\/66tick\//g) != -1)
+                this.tickRate = 66;
+            else if (fileName.search(/\/85tick\//g) != -1)
+                this.tickRate = 85;
+            else
+                throw "Invalid tickrate!";
             this.firstTickOffset = reader.getOffset();
             this.tickSize = 80;
         }
@@ -617,7 +638,9 @@ var ReplayViewRSC;
             var reader = this.reader;
             reader.seek(this.firstTickOffset + this.tickSize * tick, ReplayViewRSC.SeekOrigin.Begin);
             data.buttons = reader.readInt32();
-            reader.readString(28); // DALLUZZ
+            reader.moveOffset(4);
+            reader.readVector3(data.velocity);
+            reader.moveOffset(12);
             reader.readVector2(data.angles);
             reader.readVector3(data.position);
             return data;

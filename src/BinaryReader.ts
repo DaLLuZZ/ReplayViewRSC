@@ -31,6 +31,15 @@ namespace ReplayViewRSC {
             return this.offset;
         }
 
+        moveOffset(offset: number) {
+            if (!offset)
+                return;
+            else if (offset < 0 && Math.abs(offset) > this.offset)
+                this.offset = 0;
+            else
+                this.offset += offset;
+        }
+
         readUint8(): number {
             const value = this.view.getUint8(this.offset);
             this.offset += 1;

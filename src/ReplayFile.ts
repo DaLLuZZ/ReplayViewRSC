@@ -40,6 +40,7 @@ namespace ReplayViewRSC {
 
     export class TickData {
         readonly position = new Facepunch.Vector3();
+        readonly velocity = new Facepunch.Vector3();
         readonly angles = new Facepunch.Vector2();
         tick = -1;
         buttons: Button = 0;
@@ -76,16 +77,16 @@ namespace ReplayViewRSC {
             this.formatVersion = reader.readUint8();
 
             this.mapName = fileName.substring(fileName.search(/surf_/g), fileName.search(/_bonus_/g) != -1 ? fileName.search(/_bonus_/g) : (fileName.search(/_stage_/g) != -1 ? fileName.search(/_stage_/g) : (fileName.search(/_style_/g) != -1 ? fileName.search(/_style_/g) : fileName.search(/.rec/g))));
-            this.style = (fileName.search(/_style_/g) != -1 ? parseInt(fileName.substring(fileName.search(/_style_/g) + 7, fileName.search(/_style_/g) + 8)) as GlobalStyle;
+            this.style = (fileName.search(/_style_/g) != -1 ? parseInt(fileName.substring(fileName.search(/_style_/g) + 7, fileName.search(/_style_/g) + 8)) : 0) as GlobalStyle;
             this.time = reader.readString();
             this.playerName = reader.readString();
 
-            reader.readString(24); // DALLUZZ
+            reader.moveOffset(24);
 
             this.tickCount = reader.readInt32();
-            if (fileName.includes("/66tick/")
+            if (fileName.search(/\/66tick\//g) != -1)
                 this.tickRate = 66;
-            else if (fileName.includes("/85tick/");
+            else if (fileName.search(/\/85tick\//g) != -1)
                 this.tickRate = 85;
             else
                 throw "Invalid tickrate!";
@@ -103,9 +104,9 @@ namespace ReplayViewRSC {
             reader.seek(this.firstTickOffset + this.tickSize * tick, SeekOrigin.Begin);
 
             data.buttons = reader.readInt32();
-            
-            reader.readString(28); // DALLUZZ
-
+            reader.moveOffset(4);
+            reader.readVector3(data.velocity);
+            reader.moveOffset(12);
             reader.readVector2(data.angles);
             reader.readVector3(data.position);
 
