@@ -29,9 +29,10 @@ jobs:
         run: |
           git fetch
           git checkout gh-pages
+          rm ./js/*.*
           wget https://raw.githubusercontent.com/DaLLuZZ/Facepunch.WebGame/master/js/facepunch.webgame.js -P ./js/
           wget https://raw.githubusercontent.com/DaLLuZZ/SourceUtils/master/SourceUtils.WebExport/Resources/js/sourceutils.js -P ./js/
-          wget https://raw.githubusercontent.com/DaLLuZZ/SourceUtils/master/SourceUtils.WebExport/Resources/js/sourceutils.js -P ./js/
+          wget https://raw.githubusercontent.com/DaLLuZZ/ReplayViewRSC/master/js/replayviewer.js -P ./js/
           git config user.name DaLLuZZ
           git config user.email khrushiov2012@yandex.ru
           git add .
