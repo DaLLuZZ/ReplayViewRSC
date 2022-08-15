@@ -22,3 +22,7 @@ jobs:
           user-email: "khrushiov2012@yandex.ru"
           message: "Automatic build"
           directories: ./
+
+      - name: Purge CDN Cache
+        run: |
+          curl https://purge.jsdelivr.net/gh/DaLLuZZ/ReplayViewRSC@latest/js/replayviewer.js
