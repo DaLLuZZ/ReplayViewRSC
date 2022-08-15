@@ -130,8 +130,8 @@ namespace ReplayViewRSC {
         private getSpeedAtTick(tick: number): number {
             const replay = this.viewer.replay;
 
-            var tickData;
-            var velocity = new Facepunch.Vector3();
+            const tickData = new TickData();
+            const velocity = new Facepunch.Vector3();
 
             replay.getTickData(tick, tickData);
             velocity.copy(tickData.velocity);
