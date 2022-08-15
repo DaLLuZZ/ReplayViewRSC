@@ -36,5 +36,5 @@ jobs:
           git config user.name DaLLuZZ
           git config user.email khrushiov2012@yandex.ru
           git add .
-          git commit -m "Automatic JS update"
-          git push
+          git commit -m "Automatic JS update" || true
+          git push || true
