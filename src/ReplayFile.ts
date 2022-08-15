@@ -77,16 +77,16 @@ namespace ReplayViewRSC {
             this.formatVersion = reader.readUint8();
 
             this.mapName = fileName.substring(fileName.search(/surf_/g), fileName.search(/_bonus_/g) != -1 ? fileName.search(/_bonus_/g) : (fileName.search(/_stage_/g) != -1 ? fileName.search(/_stage_/g) : (fileName.search(/_style_/g) != -1 ? fileName.search(/_style_/g) : fileName.search(/.rec/g))));
-            this.style = (fileName.search(/_style_/g) != -1 ? parseInt(fileName.substring(fileName.search(/_style_/g) + 7, fileName.search(/_style_/g) + 8)) as GlobalStyle;
+            this.style = (fileName.search(/_style_/g) != -1 ? parseInt(fileName.substring(fileName.search(/_style_/g) + 7, fileName.search(/_style_/g) + 8) : 0) as GlobalStyle;
             this.time = reader.readString();
             this.playerName = reader.readString();
 
             reader.moveOffset(24);
 
             this.tickCount = reader.readInt32();
-            if (fileName.includes("/66tick/"))
+            if (fileName.includes(/\/66tick\//g))
                 this.tickRate = 66;
-            else if (fileName.includes("/85tick/"))
+            else if (fileName.includes(/\/85tick\//g))
                 this.tickRate = 85;
             else
                 throw "Invalid tickrate!";
