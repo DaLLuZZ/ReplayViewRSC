@@ -292,7 +292,7 @@ var ReplayViewRSC;
         };
         KeyDisplay.prototype.getSpeedAtTick = function (tick) {
             var replay = this.viewer.replay;
-            var tickData;
+            var tickData = new ReplayViewRSC.TickData();
             var velocity = new Facepunch.Vector3();
             replay.getTickData(tick, tickData);
             velocity.copy(tickData.velocity);
