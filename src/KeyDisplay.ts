@@ -131,7 +131,7 @@ namespace ReplayViewRSC {
             const replay = this.viewer.replay;
 
             var tickData;
-            var velocity;
+            var velocity = new Facepunch.Vector3();
 
             replay.getTickData(tick, tickData);
             velocity.copy(tickData.velocity);
