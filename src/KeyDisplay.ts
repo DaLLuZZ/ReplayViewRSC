@@ -130,11 +130,11 @@ namespace ReplayViewRSC {
         private getSpeedAtTick(tick: number): number {
             const replay = this.viewer.replay;
 
-            const tickData = this.tempTickData;
-            const velocity = this.tempPosition;
+            var tickData;
+            var velocity;
 
             replay.getTickData(tick, tickData);
-            velocity.copy(tickData.position);
+            velocity.copy(tickData.velocity);
 
             // Ignore vertical speed (XY)
             velocity.z = 0;
