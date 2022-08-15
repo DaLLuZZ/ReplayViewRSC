@@ -1,6 +1,13 @@
 namespace ReplayViewRSC {
     export enum GlobalStyle {
-        Normal = 0
+        Normal = 0,
+        SW = 1,
+        HSW = 2,
+        BW = 3,
+        LG = 4,
+        SM = 5,
+        FFW = 6,
+        FS = 7
     }
 
     export enum Button {
@@ -26,7 +33,7 @@ namespace ReplayViewRSC {
         Zoom = 1 << 19,
         Weapon1 = 1 << 20,
         Weapon2 = 1 << 21,
-        BullRush = 1 << 22, // ...what?
+        BullRush = 1 << 22,
         Grenade1 = 1 << 23,
         Grenade2 = 1 << 24
     }
@@ -63,20 +70,25 @@ namespace ReplayViewRSC {
 
             const magic = reader.readUint32();
             if (magic !== ReplayFile.MAGIC) {
-                throw "problem " + magic + " " + ReplayFile.MAGIC;
+                throw "Unknown replay file format!";
             }
 
             this.formatVersion = reader.readUint8();
 
             this.mapName = fileName.substring(fileName.search(/surf_/g), fileName.search(/_bonus_/g) != -1 ? fileName.search(/_bonus_/g) : (fileName.search(/_stage_/g) != -1 ? fileName.search(/_stage_/g) : (fileName.search(/_style_/g) != -1 ? fileName.search(/_style_/g) : fileName.search(/.rec/g))));
- //           this.style = reader.readInt32() as GlobalStyle;
+            this.style = (fileName.search(/_style_/g) != -1 ? parseInt(fileName.substring(fileName.search(/_style_/g) + 7, fileName.search(/_style_/g) + 8)) as GlobalStyle;
             this.time = reader.readString();
             this.playerName = reader.readString();
 
             reader.readString(24); // DALLUZZ
 
             this.tickCount = reader.readInt32();
-            this.tickRate = 85; // DALLUZZ
+            if (fileName.includes("/66tick/")
+                this.tickRate = 66;
+            else if (fileName.includes("/85tick/");
+                this.tickRate = 85;
+            else
+                throw "Invalid tickrate!";
 
             this.firstTickOffset = reader.getOffset();
             this.tickSize = 80;
