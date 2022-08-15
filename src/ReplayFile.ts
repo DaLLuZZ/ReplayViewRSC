@@ -99,7 +99,7 @@ namespace ReplayViewRSC {
             if (data === undefined) data = new TickData();
 
             data.tick = tick;
-
+console.log(tick + " " + this.tickCount - 1);
             const reader = this.reader;
             reader.seek(this.firstTickOffset + this.tickSize * tick, SeekOrigin.Begin);
 
