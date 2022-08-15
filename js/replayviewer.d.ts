@@ -13,6 +13,7 @@ declare namespace ReplayViewRSC {
         constructor(buffer: ArrayBuffer);
         seek(offset: number, origin: SeekOrigin): number;
         getOffset(): number;
+        moveOffset(offset: number): void;
         readUint8(): number;
         readInt32(): number;
         readUint32(): number;
@@ -111,7 +112,14 @@ declare namespace ReplayViewRSC {
 }
 declare namespace ReplayViewRSC {
     enum GlobalStyle {
-        Normal = 0
+        Normal = 0,
+        SW = 1,
+        HSW = 2,
+        BW = 3,
+        LG = 4,
+        SM = 5,
+        FFW = 6,
+        FS = 7
     }
     enum Button {
         Attack = 1,
@@ -142,6 +150,7 @@ declare namespace ReplayViewRSC {
     }
     class TickData {
         readonly position: Facepunch.Vector3;
+        readonly velocity: Facepunch.Vector3;
         readonly angles: Facepunch.Vector2;
         tick: number;
         buttons: Button;
