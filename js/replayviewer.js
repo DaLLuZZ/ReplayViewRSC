@@ -629,6 +629,7 @@ var ReplayViewRSC;
             if (data === undefined)
                 data = new TickData();
             data.tick = tick;
+            console.log(tick + " " + (this.tickCount - 1));
             var reader = this.reader;
             reader.seek(this.firstTickOffset + this.tickSize * tick, ReplayViewRSC.SeekOrigin.Begin);
             data.buttons = reader.readInt32();
