@@ -84,9 +84,9 @@ namespace ReplayViewRSC {
             reader.moveOffset(24);
 
             this.tickCount = reader.readInt32();
-            if (fileName.includes("/66tick/")
+            if (fileName.includes("/66tick/"))
                 this.tickRate = 66;
-            else if (fileName.includes("/85tick/");
+            else if (fileName.includes("/85tick/"))
                 this.tickRate = 85;
             else
                 throw "Invalid tickrate!";
