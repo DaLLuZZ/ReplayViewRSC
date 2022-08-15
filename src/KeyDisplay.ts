@@ -105,9 +105,9 @@ namespace ReplayViewRSC {
             const min = replay.clampTick(Math.min(this.lastTick, this.viewer.tick) - 1);
             const max = replay.clampTick(Math.max(this.lastTick, this.viewer.tick));
 
-            let prevSpeed = this.getSpeedAtTick(min, 1);
+            let prevSpeed = this.getSpeedAtTick(min);
             for (let i = min + 1; i <= max; ++i) {
-                const nextSpeed = this.getSpeedAtTick(i, 1);
+                const nextSpeed = this.getSpeedAtTick(i);
 
                 syncBuffer[this.syncIndex] = nextSpeed > prevSpeed;
                 this.syncIndex = this.syncIndex >= maxSamples - 1 ? 0 : this.syncIndex + 1;
@@ -127,25 +127,19 @@ namespace ReplayViewRSC {
             this.syncValueElem.innerText = (syncFraction * 100).toFixed(1);
         }
 
-        private getSpeedAtTick(tick: number, tickRange: number): number {
+        private getSpeedAtTick(tick: number): number {
             const replay = this.viewer.replay;
-            const firstTick = replay.clampTick(tick - Math.ceil(tickRange / 2));
-            const lastTick = replay.clampTick(firstTick + tickRange);
-            tickRange = lastTick - firstTick;
 
             const tickData = this.tempTickData;
-            const position = this.tempPosition;
+            const velocity = this.tempPosition;
 
-            replay.getTickData(lastTick, tickData);
-            position.copy(tickData.position);
+            replay.getTickData(tick, tickData);
+            velocity.copy(tickData.position);
 
-            replay.getTickData(firstTick, tickData);
-            position.sub(tickData.position);
+            // Ignore vertical speed (XY)
+            velocity.z = 0;
 
-            // Ignore vertical speed
-            position.z = 0;
-
-            return position.length() * replay.tickRate / Math.max(1, lastTick - firstTick);
+            return velocity.length();
         }
 
         private updateSpeed(): void {
@@ -154,7 +148,7 @@ namespace ReplayViewRSC {
             const replay = this.viewer.replay;
             const maxTickRange = Math.ceil(this.speedSampleRange * replay.tickRate);
 
-            let speedString = Math.round(this.getSpeedAtTick(this.viewer.tick, maxTickRange)).toString();
+            let speedString = Math.round(this.getSpeedAtTick(this.viewer.tick)).toString();
 
             for (; speedString.length < 3; speedString = "0" + speedString);
 
