@@ -25,6 +25,7 @@ jobs:
 
       - name: Update JS on GitHub Pages
         run: |
+          git fetch
           git checkout gh-pages
           wget https://raw.githubusercontent.com/DaLLuZZ/Facepunch.WebGame/master/js/facepunch.webgame.js -P ./js/
           wget https://raw.githubusercontent.com/DaLLuZZ/SourceUtils/master/SourceUtils.WebExport/Resources/js/sourceutils.js -P ./js/
