@@ -294,7 +294,7 @@ var ReplayViewRSC;
             var replay = this.viewer.replay;
             var tickData = new ReplayViewRSC.TickData();
             var velocity = new Facepunch.Vector3();
-            replay.getTickData(tick, tickData);
+            replay.getTickData(replay.clampTick(tick), tickData);
             velocity.copy(tickData.velocity);
             // Ignore vertical speed (XY)
             velocity.z = 0;
@@ -629,7 +629,6 @@ var ReplayViewRSC;
             if (data === undefined)
                 data = new TickData();
             data.tick = tick;
-            console.log(tick + " " + (this.tickCount - 1));
             var reader = this.reader;
             reader.seek(this.firstTickOffset + this.tickSize * tick, ReplayViewRSC.SeekOrigin.Begin);
             data.buttons = reader.readInt32();
