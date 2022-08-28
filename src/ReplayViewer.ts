@@ -315,6 +315,7 @@ namespace ReplayViewRSC {
                     success = event.total > 14 ? true : false; // "404: Not Found" has the length of 14 bytes
                     if (success)
                         this.mapBaseUrl = this.mapUrls[url];
+                    console.log(this.mapBaseUrl);
                 };
                 request.send('');
             }
