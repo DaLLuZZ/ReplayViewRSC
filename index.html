@@ -60,20 +60,6 @@
             {
                 viewer = new ReplayViewRSC.ReplayViewer(document.getElementById("map-view"));
                 viewer.showDebugPanel = true;
-                viewer.mapUrls = [
-                    "https://raw.githubusercontent.com/RSCSurf/SurfMaps0/main/maps",
-                    "https://raw.githubusercontent.com/RSCSurf/SurfMaps1/main/maps",
-                    "https://raw.githubusercontent.com/RSCSurf/SurfMaps2/main/maps",
-                    "https://raw.githubusercontent.com/RSCSurf/SurfMaps3/main/maps",
-                    "https://raw.githubusercontent.com/RSCSurf/SurfMaps4/main/maps",
-                    "https://raw.githubusercontent.com/RSCSurf/SurfMaps5/main/maps",
-                    "https://raw.githubusercontent.com/RSCSurf/SurfMaps6/main/maps",
-                    "https://raw.githubusercontent.com/RSCSurf/SurfMaps7/main/maps",
-                    "https://raw.githubusercontent.com/RSCSurf/SurfMaps8/main/maps",
-                    "https://raw.githubusercontent.com/RSCSurf/SurfMaps9/main/maps"
-                ]
-
-                viewer.findMapBaseUrl();
 
                 viewer.replayLoaded.addListener(function(replay) {
 
@@ -88,6 +74,21 @@
 
                 if (replayUrl != null)
                 {
+                    viewer.mapUrls = [
+                        "https://raw.githubusercontent.com/RSCSurf/SurfMaps0/main/maps/",
+                        "https://raw.githubusercontent.com/RSCSurf/SurfMaps1/main/maps/",
+                        "https://raw.githubusercontent.com/RSCSurf/SurfMaps2/main/maps/",
+                        "https://raw.githubusercontent.com/RSCSurf/SurfMaps3/main/maps/",
+                        "https://raw.githubusercontent.com/RSCSurf/SurfMaps4/main/maps/",
+                        "https://raw.githubusercontent.com/RSCSurf/SurfMaps5/main/maps/",
+                        "https://raw.githubusercontent.com/RSCSurf/SurfMaps6/main/maps/",
+                        "https://raw.githubusercontent.com/RSCSurf/SurfMaps7/main/maps/",
+                        "https://raw.githubusercontent.com/RSCSurf/SurfMaps8/main/maps/",
+                        "https://raw.githubusercontent.com/RSCSurf/SurfMaps9/main/maps/"
+                    ]
+
+                    viewer.findMapBaseUrl();
+
                     viewer.isPlaying = true;
                     viewer.loadReplay(decodeURIComponent(replayUrl));
                     viewer.animate();
