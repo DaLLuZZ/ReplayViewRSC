@@ -295,8 +295,30 @@ namespace ReplayViewRSC {
             this.messageElem.innerText = message;
         }
 
+        findMapBaseUrl(): void {
+            for (let url in this.mapUrls)
+            {
+                let request = new XMLHttpRequest;
+                request.open('GET', url, true);
+                request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+                request.setRequestHeader('Accept', '*/*');
+                request.onprogress = (event) => {
+                    let success = event.total > 14 ? true : false; // "404: Not Found" has the length of 14 bytes
+                    console.log(event.total + " bytes");
+                    console.log(success);
+                    request.abort();
+                    if (success)
+                    {
+                        this.mapBaseUrl = url;
+                        break;
+                    }
+                };
+                request.send('');
+            }
+        }
+
         /**
-         * Attempt to load a GOKZ replay from the given URL. When loaded, the
+         * Attempt to load a RSC replay from the given URL. When loaded, the
          * replay will be stored in the `replay` property in this viewer.
          * @param url Url of the replay to download.
          */
