@@ -304,7 +304,7 @@ namespace ReplayViewRSC {
                     return;
 
                 let request = new XMLHttpRequest;
-                request.open('GET', url, true);
+                request.open('GET', this.mapUrls[url], true);
                 request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
                 request.setRequestHeader('Accept', '*/*');
                 request.onprogress = (event) => {
@@ -313,7 +313,7 @@ namespace ReplayViewRSC {
                         return;
                     success = event.total > 14 ? true : false; // "404: Not Found" has the length of 14 bytes
                     if (success)
-                        this.mapBaseUrl = url;
+                        this.mapBaseUrl = this.mapUrls[url];
                 };
                 request.send('');
             }
