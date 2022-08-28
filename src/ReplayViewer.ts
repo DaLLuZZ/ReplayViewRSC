@@ -319,7 +319,7 @@ namespace ReplayViewRSC {
 
                         // Code moved from index.html
                         this.isPlaying = true;
-                        this.loadReplay(decodeURIComponent(replayUrl));
+                        this.loadReplay(decodeURIComponent(fileName));
                         this.animate();
                     }
                 };
