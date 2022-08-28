@@ -874,8 +874,7 @@ var ReplayViewRSC;
                     request.abort();
                     if (success)
                         return;
-                    console.log(url + " " + event.total);
-                    success = event.total > 14 ? true : false; // "404: Not Found" has the length of 14 bytes
+                    success = !event.total ? true : false; // "404: Not Found" has the length of 14 bytes
                     if (success) {
                         _this.mapBaseUrl = _this.mapUrls[url];
                         // Code moved from index.html
