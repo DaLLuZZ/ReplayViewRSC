@@ -859,8 +859,34 @@ var ReplayViewRSC;
                 return;
             this.messageElem.innerText = message;
         };
+        ReplayViewer.prototype.findMapBaseUrl = function () {
+            var _this = this;
+            var success = false;
+            var _loop_1 = function (url) {
+                if (success)
+                    return { value: void 0 };
+                var request = new XMLHttpRequest;
+                request.open('GET', url, true);
+                request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+                request.setRequestHeader('Accept', '*/*');
+                request.onprogress = function (event) {
+                    request.abort();
+                    if (success)
+                        return;
+                    success = event.total > 14 ? true : false; // "404: Not Found" has the length of 14 bytes
+                    if (success)
+                        _this.mapBaseUrl = url;
+                };
+                request.send('');
+            };
+            for (var url in this.mapUrls) {
+                var state_1 = _loop_1(url);
+                if (typeof state_1 === "object")
+                    return state_1.value;
+            }
+        };
         /**
-         * Attempt to load a GOKZ replay from the given URL. When loaded, the
+         * Attempt to load a RSC replay from the given URL. When loaded, the
          * replay will be stored in the `replay` property in this viewer.
          * @param url Url of the replay to download.
          */

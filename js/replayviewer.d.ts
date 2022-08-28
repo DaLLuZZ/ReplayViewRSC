@@ -376,8 +376,9 @@ declare namespace ReplayViewRSC {
          * @param message Message to display
          */
         showMessage(message: string): void;
+        findMapBaseUrl(): void;
         /**
-         * Attempt to load a GOKZ replay from the given URL. When loaded, the
+         * Attempt to load a RSC replay from the given URL. When loaded, the
          * replay will be stored in the `replay` property in this viewer.
          * @param url Url of the replay to download.
          */
