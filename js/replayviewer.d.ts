@@ -207,6 +207,11 @@ declare namespace ReplayViewRSC {
          */
         mapBaseUrl: string;
         /**
+        * The array should contain all URLs to look for the specified exported map.
+        * @example `viewer.mapBaseUrl = ["http://my-website.com/maps", "http://not-my-but-actually-a-website.com/maps"];`
+        */
+        mapUrls: any[];
+        /**
          * The currently loaded replay. Will be automatically set after a
          * replay is loaded with `loadReplay(url)`. You can also set this
          * manually to switch between replays.
