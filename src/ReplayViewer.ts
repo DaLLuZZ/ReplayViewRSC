@@ -299,21 +299,21 @@ namespace ReplayViewRSC {
             for (let url in this.mapUrls)
             {
                 let request = new XMLHttpRequest;
+                let success = false;
+
                 request.open('GET', url, true);
                 request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
                 request.setRequestHeader('Accept', '*/*');
                 request.onprogress = (event) => {
-                    let success = event.total > 14 ? true : false; // "404: Not Found" has the length of 14 bytes
-                    console.log(event.total + " bytes");
-                    console.log(success);
+                    success = event.total > 14 ? true : false; // "404: Not Found" has the length of 14 bytes
                     request.abort();
                     if (success)
-                    {
                         this.mapBaseUrl = url;
-                        break;
-                    }
                 };
                 request.send('');
+
+                if (success)
+                    return;
             }
         }
 
