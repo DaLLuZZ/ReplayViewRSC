@@ -89,9 +89,6 @@
 
                     viewer.findMapBaseUrl(replayUrl);
 
-                    if (viewer.mapBaseUrl == null)
-                        throw "Exported map was not found!";
-
                     viewer.isPlaying = true;
                     viewer.loadReplay(decodeURIComponent(replayUrl));
                     viewer.animate();
