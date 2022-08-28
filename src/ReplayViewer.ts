@@ -296,24 +296,26 @@ namespace ReplayViewRSC {
         }
 
         findMapBaseUrl(): void {
+            let success = false;
+
             for (let url in this.mapUrls)
             {
-                let request = new XMLHttpRequest;
-                let success = false;
+                if (success)
+                    return;
 
+                let request = new XMLHttpRequest;
                 request.open('GET', url, true);
                 request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
                 request.setRequestHeader('Accept', '*/*');
                 request.onprogress = (event) => {
-                    success = event.total > 14 ? true : false; // "404: Not Found" has the length of 14 bytes
                     request.abort();
+                    if (success)
+                        return;
+                    success = event.total > 14 ? true : false; // "404: Not Found" has the length of 14 bytes
                     if (success)
                         this.mapBaseUrl = url;
                 };
                 request.send('');
-
-                if (success)
-                    return;
             }
         }
 
