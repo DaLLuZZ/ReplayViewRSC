@@ -87,7 +87,10 @@
                         "https://raw.githubusercontent.com/RSCSurf/SurfMaps9/main/maps/"
                     ]
 
-                    viewer.findMapBaseUrl();
+                    viewer.findMapBaseUrl(replayUrl);
+
+                    if (viewer.mapBaseUrl == null)
+                        throw "Exported map was not found!";
 
                     viewer.isPlaying = true;
                     viewer.loadReplay(decodeURIComponent(replayUrl));
