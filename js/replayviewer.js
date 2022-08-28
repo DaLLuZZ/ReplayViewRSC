@@ -866,7 +866,7 @@ var ReplayViewRSC;
                 if (success)
                     return { value: void 0 };
                 var request = new XMLHttpRequest;
-                request.open('GET', url, true);
+                request.open('GET', this_1.mapUrls[url], true);
                 request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
                 request.setRequestHeader('Accept', '*/*');
                 request.onprogress = function (event) {
@@ -875,10 +875,11 @@ var ReplayViewRSC;
                         return;
                     success = event.total > 14 ? true : false; // "404: Not Found" has the length of 14 bytes
                     if (success)
-                        _this.mapBaseUrl = url;
+                        _this.mapBaseUrl = _this.mapUrls[url];
                 };
                 request.send('');
             };
+            var this_1 = this;
             for (var url in this.mapUrls) {
                 var state_1 = _loop_1(url);
                 if (typeof state_1 === "object")
