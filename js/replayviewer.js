@@ -664,6 +664,11 @@ var ReplayViewRSC;
         function ReplayViewer(container) {
             var _this = _super.call(this, container) || this;
             /**
+            * The array should contain all URLs to look for the specified exported map.
+            * @example `viewer.mapBaseUrl = ["http://my-website.com/maps", "http://not-my-but-actually-a-website.com/maps"];`
+            */
+            _this.mapUrls = [];
+            /**
              * If true, the current tick will be stored in the address hash when
              * playback is paused or the viewer uses the playback bar to skip
              * around.
