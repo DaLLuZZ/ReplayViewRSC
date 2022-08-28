@@ -312,12 +312,12 @@ namespace ReplayViewRSC {
                     request.abort();
                     if (success)
                         return;
+                    console.log(url);
                     success = event.total > 14 ? true : false; // "404: Not Found" has the length of 14 bytes
                     if (success)
                     {
                         this.mapBaseUrl = this.mapUrls[url];
 
-                        console.log(this.mapBaseUrl);
                         // Code moved from index.html
                         this.isPlaying = true;
                         this.loadReplay(decodeURIComponent(fileName));
