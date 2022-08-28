@@ -88,10 +88,6 @@
                     ]
 
                     viewer.findMapBaseUrl(replayUrl);
-
-                    viewer.isPlaying = true;
-                    viewer.loadReplay(decodeURIComponent(replayUrl));
-                    viewer.animate();
                 }
                 else
                     viewer.showMessage("No replay URL provided");
