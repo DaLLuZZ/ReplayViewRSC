@@ -376,7 +376,7 @@ declare namespace ReplayViewRSC {
          * @param message Message to display
          */
         showMessage(message: string): void;
-        findMapBaseUrl(): void;
+        findMapBaseUrl(fileName: string): void;
         /**
          * Attempt to load a RSC replay from the given URL. When loaded, the
          * replay will be stored in the `replay` property in this viewer.

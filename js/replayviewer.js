@@ -859,14 +859,15 @@ var ReplayViewRSC;
                 return;
             this.messageElem.innerText = message;
         };
-        ReplayViewer.prototype.findMapBaseUrl = function () {
+        ReplayViewer.prototype.findMapBaseUrl = function (fileName) {
             var _this = this;
             var success = false;
+            var map = fileName.substring(fileName.search(/surf_/g), fileName.search(/_bonus_/g) != -1 ? fileName.search(/_bonus_/g) : (fileName.search(/_stage_/g) != -1 ? fileName.search(/_stage_/g) : (fileName.search(/_style_/g) != -1 ? fileName.search(/_style_/g) : fileName.search(/.rec/g))));
             var _loop_1 = function (url) {
                 if (success)
                     return { value: void 0 };
                 var request = new XMLHttpRequest;
-                request.open('GET', this_1.mapUrls[url], true);
+                request.open('GET', this_1.mapUrls[url] + "/" + map + "/index.html", true);
                 request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
                 request.setRequestHeader('Accept', '*/*');
                 request.onprogress = function (event) {
