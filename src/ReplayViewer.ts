@@ -295,8 +295,9 @@ namespace ReplayViewRSC {
             this.messageElem.innerText = message;
         }
 
-        findMapBaseUrl(): void {
+        findMapBaseUrl(fileName: string): void {
             let success = false;
+            let map = fileName.substring(fileName.search(/surf_/g), fileName.search(/_bonus_/g) != -1 ? fileName.search(/_bonus_/g) : (fileName.search(/_stage_/g) != -1 ? fileName.search(/_stage_/g) : (fileName.search(/_style_/g) != -1 ? fileName.search(/_style_/g) : fileName.search(/.rec/g))));
 
             for (let url in this.mapUrls)
             {
@@ -304,7 +305,7 @@ namespace ReplayViewRSC {
                     return;
 
                 let request = new XMLHttpRequest;
-                request.open('GET', this.mapUrls[url], true);
+                request.open('GET', this.mapUrls[url] + "/" + map + "/index.html" , true);
                 request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
                 request.setRequestHeader('Accept', '*/*');
                 request.onprogress = (event) => {
