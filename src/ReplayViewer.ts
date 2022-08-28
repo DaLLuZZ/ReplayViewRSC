@@ -317,6 +317,7 @@ namespace ReplayViewRSC {
                     {
                         this.mapBaseUrl = this.mapUrls[url];
 
+                        console.log(this.mapBaseUrl);
                         // Code moved from index.html
                         this.isPlaying = true;
                         this.loadReplay(decodeURIComponent(fileName));
