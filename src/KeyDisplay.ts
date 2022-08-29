@@ -28,8 +28,8 @@ namespace ReplayViewRSC {
                 <div class="key key-walk">Walk</div>
                 <div class="key key-duck">Duck</div>
                 <div class="key key-jump">Jump</div>
-                <div class="key key-left">+L</div>
-                <div class="key key-right">+R</div>`;
+                <div class="key key-left">Left</div>
+                <div class="key key-right">Right</div>`;
 
             container.appendChild(element);
 
