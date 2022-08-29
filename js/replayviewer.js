@@ -223,7 +223,7 @@ var ReplayViewRSC;
             this.buttonMap[ReplayViewRSC.Button.Duck] = element.getElementsByClassName("key-duck")[0];
             this.buttonMap[ReplayViewRSC.Button.Jump] = element.getElementsByClassName("key-jump")[0];
             this.buttonMap[ReplayViewRSC.Button.Left] = element.getElementsByClassName("key-left")[0];
-            this.buttonMap[ReplayViewRSC.Button.Right] = element.getElementsByClassName("key-left")[0];
+            this.buttonMap[ReplayViewRSC.Button.Right] = element.getElementsByClassName("key-right")[0];
             this.syncValueElem = element.getElementsByClassName("sync-value")[0];
             this.speedValueElem = element.getElementsByClassName("speed-value")[0];
             viewer.showKeyDisplayChanged.addListener(function (showKeyDisplay) {
