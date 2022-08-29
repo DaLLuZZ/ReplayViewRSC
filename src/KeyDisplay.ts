@@ -41,7 +41,7 @@ namespace ReplayViewRSC {
             this.buttonMap[Button.Duck] = element.getElementsByClassName("key-duck")[0] as HTMLElement;
             this.buttonMap[Button.Jump] = element.getElementsByClassName("key-jump")[0] as HTMLElement;
             this.buttonMap[Button.Left] = element.getElementsByClassName("key-left")[0] as HTMLElement;
-            this.buttonMap[Button.Right] = element.getElementsByClassName("key-left")[0] as HTMLElement;
+            this.buttonMap[Button.Right] = element.getElementsByClassName("key-right")[0] as HTMLElement;
 
             this.syncValueElem = element.getElementsByClassName("sync-value")[0] as HTMLElement;
             this.speedValueElem = element.getElementsByClassName("speed-value")[0] as HTMLElement;
