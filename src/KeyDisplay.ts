@@ -27,7 +27,9 @@ namespace ReplayViewRSC {
                 <div class="key key-d">D</div>
                 <div class="key key-walk">Walk</div>
                 <div class="key key-duck">Duck</div>
-                <div class="key key-jump">Jump</div>`;
+                <div class="key key-jump">Jump</div>
+                <div class="key key-left">+L</div>
+                <div class="key key-right">+R</div>`;
 
             container.appendChild(element);
 
@@ -38,6 +40,8 @@ namespace ReplayViewRSC {
             this.buttonMap[Button.Walk] = element.getElementsByClassName("key-walk")[0] as HTMLElement;
             this.buttonMap[Button.Duck] = element.getElementsByClassName("key-duck")[0] as HTMLElement;
             this.buttonMap[Button.Jump] = element.getElementsByClassName("key-jump")[0] as HTMLElement;
+            this.buttonMap[Button.Left] = element.getElementsByClassName("key-left")[0] as HTMLElement;
+            this.buttonMap[Button.Right] = element.getElementsByClassName("key-left")[0] as HTMLElement;
 
             this.syncValueElem = element.getElementsByClassName("sync-value")[0] as HTMLElement;
             this.speedValueElem = element.getElementsByClassName("speed-value")[0] as HTMLElement;
