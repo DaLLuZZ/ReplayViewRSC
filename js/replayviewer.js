@@ -213,7 +213,7 @@ var ReplayViewRSC;
                 container = viewer.container;
             var element = this.element = document.createElement("div");
             element.classList.add("key-display");
-            element.innerHTML = "\n                <div class=\"stat sync-outer\">Sync: <span class=\"value sync-value\">0.0</span> %</div>\n                <div class=\"stat speed-outer\">Speed: <span class=\"value speed-value\">000</span> u/s</div>\n                <div class=\"key key-w\">W</div>\n                <div class=\"key key-a\">A</div>\n                <div class=\"key key-s\">S</div>\n                <div class=\"key key-d\">D</div>\n                <div class=\"key key-walk\">Walk</div>\n                <div class=\"key key-duck\">Duck</div>\n                <div class=\"key key-jump\">Jump</div>";
+            element.innerHTML = "\n                <div class=\"stat sync-outer\">Sync: <span class=\"value sync-value\">0.0</span> %</div>\n                <div class=\"stat speed-outer\">Speed: <span class=\"value speed-value\">000</span> u/s</div>\n                <div class=\"key key-w\">W</div>\n                <div class=\"key key-a\">A</div>\n                <div class=\"key key-s\">S</div>\n                <div class=\"key key-d\">D</div>\n                <div class=\"key key-walk\">Walk</div>\n                <div class=\"key key-duck\">Duck</div>\n                <div class=\"key key-jump\">Jump</div>\n                <div class=\"key key-left\">+L</div>\n                <div class=\"key key-right\">+R</div>";
             container.appendChild(element);
             this.buttonMap[ReplayViewRSC.Button.Forward] = element.getElementsByClassName("key-w")[0];
             this.buttonMap[ReplayViewRSC.Button.MoveLeft] = element.getElementsByClassName("key-a")[0];
@@ -222,6 +222,8 @@ var ReplayViewRSC;
             this.buttonMap[ReplayViewRSC.Button.Walk] = element.getElementsByClassName("key-walk")[0];
             this.buttonMap[ReplayViewRSC.Button.Duck] = element.getElementsByClassName("key-duck")[0];
             this.buttonMap[ReplayViewRSC.Button.Jump] = element.getElementsByClassName("key-jump")[0];
+            this.buttonMap[ReplayViewRSC.Button.Left] = element.getElementsByClassName("key-left")[0];
+            this.buttonMap[ReplayViewRSC.Button.Right] = element.getElementsByClassName("key-left")[0];
             this.syncValueElem = element.getElementsByClassName("sync-value")[0];
             this.speedValueElem = element.getElementsByClassName("speed-value")[0];
             viewer.showKeyDisplayChanged.addListener(function (showKeyDisplay) {
