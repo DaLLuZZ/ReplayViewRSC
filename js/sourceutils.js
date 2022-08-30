@@ -1199,6 +1199,9 @@ var SourceUtils;
             else {
                 sample = samples[2];
             }
+            // DaLLuZZ: HACK FIX, TODO: CHECK surf_calzone models (ramps) loading
+            if (sample == null)
+                return 0x7f7f7f;
             mul = normal.y * normal.y;
             rgb.add(sample.x * mul, sample.y * mul, sample.z * mul);
             if (normal.z < 0) {
