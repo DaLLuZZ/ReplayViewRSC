@@ -1182,7 +1182,7 @@ var SourceUtils;
         StudioModel.sampleAmbientCube = function (leaf, pos, normal) {
             var rgb = StudioModel.sampleAmbientCube_temp.set(0, 0, 0);
             var samples = StudioModel.sampleAmbientCube_samples;
-            leaf.getAmbientCube(pos, samples);
+            leaf.getAmbientCube(pos, samples, function (success) { return console.log("sampleAmbientCube -> getAmbientCube: success = " + success); });
             var sample;
             var mul;
             if (normal.x < 0) {
